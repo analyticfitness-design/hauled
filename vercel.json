@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm run build",
+  "framework": "nuxtjs",
+  "regions": ["gru1"],
+  "crons": []
+}

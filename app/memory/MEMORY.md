@@ -1,0 +1,1 @@
+- [feedback_autonomy.md](feedback_autonomy.md) — Ejecutar módulos sin pedir permiso

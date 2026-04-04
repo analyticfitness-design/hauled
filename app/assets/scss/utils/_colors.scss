@@ -1,0 +1,75 @@
+$colors: (
+    'common': (
+        'white': #ffffff,
+        'black-solid': #000,
+        'black': #111111,
+    ),
+    'yellow': (
+        '1': #4cc9f0,
+        '2': #0099cc,
+        '3': #38b5db,
+    ),
+    'pink': (
+        '1': #4cc9f0,
+        '2': #0099cc,
+        '3': #33b5e5,
+        '4': #5dd3f3,
+    ),
+    'green': (
+        'dark': #0d2233,
+        '1': #0099cc,
+    ),
+    'khaki': (
+        '1': #4cc9f0,
+    ),
+    'blue': (
+        '1': #4cc9f0,
+    ),
+    'orange': (
+        '1': #4cc9f0,
+    ),
+    'heading': (
+        'primary': #111111,
+        'secondary': #222222,
+    ),
+    'grey': (
+        '1':#f4f4f4,
+        '2':#f8f8f8,
+        '3':#e0e0e0,
+        '4':#f4f4f4,
+        '5':#eeeeee,
+        '6':#f0f0f0,
+        '7':#f6f6f6,
+        '8':#e8e8e8,
+        '9':#ebebeb,
+    ),
+    'text': (
+        'body':#444444,
+        '1':#666666,
+        '2':#555555,
+        '3':#999999,
+        '4':#777777,
+        '5':#888888,
+        '6':#aaaaaa,
+    ),
+    'theme': (
+        'primary': #4cc9f0,
+        'secondary': #0099cc,
+        'brown': #4cc9f0,
+        'green': #0099cc,
+    ),
+    'footer': (
+        'grey-1': #f4f4f4
+    ),
+    'border': (
+        'primary': #e0e0e0,
+        'secondary': #eeeeee,
+        '3': #e8e8e8,
+        '4': #ebebeb,
+    )
+);
+
+$white : #ffffff;
+$black : #111111;
+$theme-primary : #4cc9f0;
+$border-primary : #e0e0e0;

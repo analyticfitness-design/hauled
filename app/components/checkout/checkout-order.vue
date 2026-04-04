@@ -1,0 +1,151 @@
+<template>
+  <div class="tp-checkout-place white-bg">
+    <h3 class="tp-checkout-place-title" style="font-family:'Raleway',sans-serif;font-weight:900;letter-spacing:2px">
+      Tu Pedido
+    </h3>
+
+    <div class="tp-order-info-list">
+      <ul>
+        <!-- Header -->
+        <li class="tp-order-info-list-header">
+          <h4>Producto</h4>
+          <h4>Total</h4>
+        </li>
+
+        <!-- Items de stock -->
+        <li
+          v-for="item in stockItems"
+          :key="item.id"
+          class="tp-order-info-list-desc"
+        >
+          <p>{{ item.title }} <span>x {{ item.orderQuantity }}</span></p>
+          <span>{{ formatPrice(item.price * (item.orderQuantity ?? 1)) }}</span>
+        </li>
+
+        <!-- Items de encargo (separados) -->
+        <li v-if="encargoItems.length > 0" class="tp-order-info-list-desc hauled-encargo-separator">
+          <p style="color:#4cc9f0;font-weight:700">📦 Encargos (cotización pendiente)</p>
+          <span>—</span>
+        </li>
+        <li
+          v-for="item in encargoItems"
+          :key="item.id"
+          class="tp-order-info-list-desc"
+        >
+          <p style="color:#666">{{ item.title }}</p>
+          <span style="color:#4cc9f0;font-size:0.8rem">Cotizar</span>
+        </li>
+
+        <!-- Subtotal -->
+        <li class="tp-order-info-list-subtotal">
+          <span>Subtotal</span>
+          <span>{{ formatPrice(cartStore.totalPriceQuantity.total) }}</span>
+        </li>
+
+        <!-- Envío -->
+        <li class="tp-order-info-list-shipping">
+          <span>Envío</span>
+          <div class="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
+            <span>
+              <input id="envio_bog" type="radio" name="shipping" />
+              <label @click="handleShippingCost(15000)" for="envio_bog">Bogotá: <span>{{ formatPrice(15000) }}</span></label>
+            </span>
+            <span>
+              <input id="envio_nac" type="radio" name="shipping" />
+              <label @click="handleShippingCost(22000)" for="envio_nac">Nacional: <span>{{ formatPrice(22000) }}</span></label>
+            </span>
+            <span>
+              <input id="envio_free" type="radio" name="shipping" />
+              <label @click="handleShippingCost(0)" for="envio_free">Gratis (+$300.000)</label>
+            </span>
+          </div>
+        </li>
+
+        <!-- Total -->
+        <li class="tp-order-info-list-total">
+          <span>Total</span>
+          <span>{{ formatPrice(cartStore.totalPriceQuantity.total + shipCost) }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Métodos de pago -->
+    <div class="tp-checkout-payment">
+      <div class="tp-checkout-payment-item">
+        <input type="radio" id="wompi" name="payment" checked />
+        <label @click="handlePayment('wompi')" for="wompi">
+          Wompi — PSE, Tarjeta, Nequi, Bancolombia
+        </label>
+        <div v-if="payment_name === 'wompi'" class="tp-checkout-payment-desc">
+          <p>Pago 100% seguro. Procesado por Wompi (Bancolombia). Acepta tarjetas débito/crédito, PSE, Nequi y Bancolombia a la mano.</p>
+        </div>
+      </div>
+      <div class="tp-checkout-payment-item">
+        <input type="radio" id="transferencia" name="payment" />
+        <label @click="handlePayment('transferencia')" for="transferencia">
+          Transferencia bancaria / Nequi
+        </label>
+        <div v-if="payment_name === 'transferencia'" class="tp-checkout-payment-desc">
+          <p>Transfiere al número Nequi o cuenta bancaria HAULED. Envíanos el comprobante por WhatsApp para confirmar tu pedido.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aviso encargos -->
+    <div v-if="encargoItems.length > 0" class="hauled-encargo-checkout-notice">
+      <p>📦 Tus encargos serán coordinados por WhatsApp en las próximas 24h.</p>
+    </div>
+
+    <!-- Términos -->
+    <div class="tp-checkout-agree">
+      <div class="tp-checkout-option">
+        <input id="terminos" type="checkbox" v-model="termsAccepted" />
+        <label for="terminos">Acepto los términos y condiciones de HAULED.</label>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <div class="tp-checkout-btn-wrapper">
+      <button
+        type="submit"
+        class="tp-checkout-btn w-100"
+        :disabled="!termsAccepted"
+        style="font-family:'Raleway',sans-serif;font-weight:900;letter-spacing:2px"
+      >
+        Confirmar pedido
+      </button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useCartStore } from '@/pinia/useCartStore';
+const cartStore = useCartStore();
+
+let shipCost = ref<number>(0);
+let payment_name = ref<string>('wompi');
+let termsAccepted = ref<boolean>(false);
+
+const stockItems = computed(() =>
+  cartStore.cart_products.filter(p => p.hauledLine !== 'encargo')
+);
+const encargoItems = computed(() =>
+  cartStore.cart_products.filter(p => p.hauledLine === 'encargo')
+);
+
+const handleShippingCost = (value: number) => { shipCost.value = value; };
+const handlePayment = (value: string) => { payment_name.value = value; };
+</script>
+
+<style scoped>
+.hauled-encargo-separator { border-top: 1px dashed #4cc9f0; }
+.hauled-encargo-checkout-notice {
+  background: #f4f4f4;
+  border-left: 4px solid #4cc9f0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #444;
+  margin: 12px 0;
+}
+</style>

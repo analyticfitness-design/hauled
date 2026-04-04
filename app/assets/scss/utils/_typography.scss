@@ -1,0 +1,25 @@
+
+// font url — HAULED: Raleway (display/logo) + Inter (body)
+$font-url: 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap';
+
+// font family
+$font-family: (
+    'ff': (
+        'body': "'Inter', sans-serif",
+        'heading': "'Raleway', sans-serif",
+        'p': "'Inter', sans-serif",
+        'jost': "'Inter', sans-serif",
+        'fontawesome': '"Font Awesome 6 Pro"',
+        'roboto': "'Inter', sans-serif",
+        'oregano': "'Raleway', sans-serif",
+        'charm': "'Raleway', sans-serif",
+    )
+);
+
+// font size
+$font-size: (
+    'fz': (
+        'body': 15px,
+        'p': 15px,
+    )
+);

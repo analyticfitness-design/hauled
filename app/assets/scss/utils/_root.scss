@@ -1,0 +1,41 @@
+@use 'colors' as *;
+@use 'typography' as *;
+
+:root {
+    /**
+    @font family declaration
+    */
+    @each $ff, $shades in $font-family {
+        @each $shade, $value in $shades {
+            --tp-#{$ff}-#{$shade}: #{$value};
+        }
+    }
+
+    /**
+    @color declaration
+    */
+    @each $color, $shades in $colors {
+        @each $shade, $value in $shades {
+            --tp-#{$color}-#{$shade}: #{$value};
+        }
+    }
+
+    // HAULED design tokens — Azul eléctrico sobre blanco
+    --hauled-bg:           #ffffff;
+    --hauled-bg-secondary: #f4f4f4;
+    --hauled-bg-card:      #f8f8f8;
+    --hauled-bg-dark:      #111111;
+    --hauled-accent:       #4cc9f0;
+    --hauled-accent-hover: #0099cc;
+    --hauled-text:         #111111;
+    --hauled-text-muted:   #666666;
+    --hauled-border:       #e0e0e0;
+    --hauled-tagline:      #4cc9f0;
+}
+
+// Fondo blanco global HAULED
+body {
+    background-color: var(--hauled-bg) !important;
+    color: var(--hauled-text) !important;
+    font-family: 'Inter', sans-serif;
+}
