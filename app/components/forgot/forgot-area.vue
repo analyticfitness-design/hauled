@@ -19,7 +19,7 @@
                       <div class="tp-login-input-wrapper">
                         <div class="tp-login-input-box">
                             <div class="tp-login-input">
-                              <input id="email" type="email" placeholder="shofy@mail.com" v-bind="email">
+                              <input id="email" type="email" placeholder="tu@correo.com" v-bind="email">
                             </div>
                             <div class="tp-login-input-title">
                               <label for="email">Your Email</label>

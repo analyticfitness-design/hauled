@@ -12,7 +12,7 @@
         </div>
         <div class="tp-contact-input-box">
             <div class="tp-contact-input">
-              <input name="email" id="email" type="email" placeholder="shofy@mail.com" v-bind="email">
+              <input name="email" id="email" type="email" placeholder="tu@correo.com" v-bind="email">
             </div>
             <div class="tp-contact-input-title">
               <label for="email">Your Email</label>

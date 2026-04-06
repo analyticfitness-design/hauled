@@ -8,7 +8,7 @@
               Shop by Category
               <svg-section-line-2/>
             </span>
-            <h3 class="tp-section-title-2">Popular on the Shofy store.</h3>
+            <h3 class="tp-section-title-2">Los más populares</h3>
           </div>
         </div>
       </div>

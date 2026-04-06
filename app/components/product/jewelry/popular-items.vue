@@ -8,7 +8,7 @@
         <div class="col-xl-12">
           <div class="tp-section-title-wrapper-4 mb-60 text-center">
             <span class="tp-section-title-pre-4">Shop by Category</span>
-            <h3 class="tp-section-title-4">Popular on the Shofy store.</h3>
+            <h3 class="tp-section-title-4">Los más populares</h3>
           </div>
         </div>
       </div>

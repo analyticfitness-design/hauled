@@ -47,7 +47,7 @@
             name="email"
             id="email"
             type="email"
-            placeholder="shofy@mail.com"
+            placeholder="tu@correo.com"
             v-bind="email"
           />
         </div>

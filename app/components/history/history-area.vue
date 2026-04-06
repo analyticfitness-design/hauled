@@ -106,7 +106,7 @@ const slider_data: {
     subtitle_2:
       "So start browsing today and find the perfect products to suit your needs!",
     img: "/img/history/history-1.jpg",
-    thumb_text: "Welcome to our <br> Shofy eCommerce Theme",
+    thumb_text: "La historia de <br> HAULED",
     year: 2016,
   },
   {
@@ -116,7 +116,7 @@ const slider_data: {
     subtitle_2:
       "So start browsing today and find the perfect products to suit your needs!",
     img: "/img/history/history-2.jpg",
-    thumb_text: "Welcome to our <br> Shofy eCommerce Theme",
+    thumb_text: "La historia de <br> HAULED",
     year: 2017,
   },
   {
@@ -126,7 +126,7 @@ const slider_data: {
     subtitle_2:
       "So start browsing today and find the perfect products to suit your needs!",
     img: "/img/history/history-1.jpg",
-    thumb_text: "Welcome to our <br> Shofy eCommerce Theme",
+    thumb_text: "La historia de <br> HAULED",
     year: 2018,
   },
   {
@@ -136,7 +136,7 @@ const slider_data: {
     subtitle_2:
       "So start browsing today and find the perfect products to suit your needs!",
     img: "/img/history/history-2.jpg",
-    thumb_text: "Welcome to our <br> Shofy eCommerce Theme",
+    thumb_text: "La historia de <br> HAULED",
     year: 2019,
   },
 ];
