@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-two :style_2="true" />
+    <header-one />
     <main>
       <slot />
     </main>
