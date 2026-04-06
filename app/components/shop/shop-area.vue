@@ -39,8 +39,8 @@
                     </div>
                     <div class="tp-shop-top-result">
                       <p>
-                        Showing 1–{{ store.filteredProducts?.slice(startIndex,endIndex).length }} of
-                        {{ product_data.length }} results
+                        Mostrando 1–{{ store.filteredProducts?.slice(startIndex,endIndex).length }} de
+                        {{ store.filteredProducts?.length }} resultados
                       </p>
                     </div>
                   </div>

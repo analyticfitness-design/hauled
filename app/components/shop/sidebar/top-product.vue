@@ -49,6 +49,7 @@ import product_data from "@/data/product-data";
 import { type IReview, type IProduct } from "@/types/product-type";
 
 let topRatedProducts: { product: IProduct; rating: number }[] = product_data
+  .filter(p => p.brand?.name === 'GASP')
   .map((product) => {
     if (product.reviews && product.reviews.length > 0) {
       const totalRating = product.reviews.reduce(

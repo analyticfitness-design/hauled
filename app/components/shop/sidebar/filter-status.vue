@@ -17,7 +17,7 @@
 import { formatString } from "@/utils/index";
 const route = useRoute();
 const router = useRouter();
-const status = ref<string[]>(["On sale", "In Stock"]);
+const status = ref<string[]>(["En descuento", "En stock"]);
 
 function handleStatus(status: string) {
   router.push({
