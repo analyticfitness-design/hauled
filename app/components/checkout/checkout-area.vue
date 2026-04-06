@@ -1,10 +1,10 @@
 <template>
-  <section class="tp-checkout-area pb-120" style="background-color: #EFF1F5;">
+  <section class="tp-checkout-area pb-120" style="background-color: var(--h-grey, #F4F4F4);">
     <div class="container">
       <div v-if="cartStore.cart_products.length === 0" class="text-center pt-50">
-        <h3 class="py-2">No items found in cart to checkout</h3>
+        <h3 class="py-2">No hay productos en el carrito</h3>
         <nuxt-link href="/shop" class="tp-checkout-btn">
-          Return to shop
+          Volver a la tienda
         </nuxt-link>
       </div>
       <div v-else class="row">
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-lg-7">
               <div class="tp-checkout-bill-area">
-                <h3 class="tp-checkout-bill-title">Billing Details</h3>
+                <h3 class="tp-checkout-bill-title">Datos de facturación</h3>
                 <checkout-billing />
               </div>
             </div>
