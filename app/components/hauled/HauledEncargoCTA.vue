@@ -41,42 +41,42 @@ const whatsappNumber = config.public.whatsappNumber as string;
 
 <style scoped>
 .hauled-encargo-cta {
-  padding: 80px 0;
-  background: #0d2233;
+  padding: var(--h-section-py, 80px) 0;
+  background: var(--h-navy, #0d2233);
 }
 .hauled-encargo-inner {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 60px;
+  gap: clamp(32px, 5vw, 60px);
   align-items: center;
 }
 @media (max-width: 768px) {
-  .hauled-encargo-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hauled-encargo-inner { grid-template-columns: 1fr; gap: 36px; }
 }
 .hauled-encargo-eyebrow {
   display: inline-block;
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 3px;
+  font-size: var(--h-fs-label, 0.72rem);
+  font-weight: 300;
+  letter-spacing: var(--h-ls-sub, 7px);
   text-transform: uppercase;
-  color: #4cc9f0;
+  color: var(--h-blue, #4CC9F0);
   margin-bottom: 16px;
 }
 .hauled-encargo-title {
   font-family: 'Raleway', sans-serif;
   font-weight: 900;
-  font-size: 2rem;
-  letter-spacing: 2px;
+  font-size: var(--h-fs-h2, clamp(1.4rem, 4vw, 2.2rem));
+  letter-spacing: var(--h-ls-title, 2px);
   text-transform: uppercase;
   color: #fff;
   margin-bottom: 16px;
 }
 .hauled-encargo-desc {
   font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
+  font-size: var(--h-fs-body, 0.95rem);
   line-height: 1.7;
-  color: rgba(255,255,255,0.7);
+  color: var(--h-muted, rgba(255,255,255,0.6));
   margin-bottom: 24px;
   max-width: 480px;
 }
@@ -86,56 +86,59 @@ const whatsappNumber = config.public.whatsappNumber as string;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 .hauled-encargo-list li {
   font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.85);
+  font-size: var(--h-fs-small, 0.88rem);
+  color: rgba(255,255,255,0.75);
 }
 .hauled-encargo-action {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  min-width: 260px;
+  gap: 14px;
+  align-items: stretch;
+  min-width: 250px;
 }
+@media (max-width: 768px) { .hauled-encargo-action { min-width: 0; } }
 .hauled-wa-cta {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #25D366;
   color: #fff;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 1px;
-  padding: 16px 32px;
+  padding: 16px 28px;
   border-radius: 6px;
   text-decoration: none;
-  text-align: center;
-  width: 100%;
-  transition: background 0.2s;
+  min-height: 50px;
+  transition: background var(--h-dur-fast, 180ms);
 }
-.hauled-wa-cta:hover { background: #1db954; }
+.hauled-wa-cta:hover { background: #1aab52; }
 .hauled-catalog-cta {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
-  color: #4cc9f0;
+  color: var(--h-blue, #4CC9F0);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 0.85rem;
-  padding: 12px 32px;
-  border: 1px solid #4cc9f0;
+  font-size: var(--h-fs-small, 0.85rem);
+  padding: 14px 28px;
+  border: 1px solid var(--h-blue, #4CC9F0);
   border-radius: 6px;
   text-decoration: none;
-  text-align: center;
-  width: 100%;
-  transition: all 0.2s;
+  min-height: 44px;
+  transition: background var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms);
 }
-.hauled-catalog-cta:hover { background: #4cc9f0; color: #fff; }
+.hauled-catalog-cta:hover { background: var(--h-blue, #4CC9F0); color: #111; }
 .hauled-encargo-note {
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
+  font-size: var(--h-fs-label, 0.72rem);
+  color: rgba(255,255,255,0.28);
   text-align: center;
   margin: 0;
 }

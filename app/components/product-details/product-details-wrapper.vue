@@ -236,6 +236,146 @@ const hasColorData = computed(() =>
 );
 </script>
 
+<style>
+/* ── Product Detail — HAULED Styles ─────────────────── */
+.tp-product-details-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: var(--h-fs-h1, clamp(1.6rem, 4vw, 2.4rem)) !important;
+  letter-spacing: -0.5px !important;
+  color: var(--h-black, #111) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 12px !important;
+}
+.tp-product-details-price-wrapper { margin: 20px 0 24px; }
+.tp-product-details-price.new-price {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(1.5rem, 4vw, 2rem) !important;
+  color: var(--h-black, #111) !important;
+}
+.tp-product-details-price.old-price {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1rem !important;
+  color: rgba(0,0,0,0.35) !important;
+  text-decoration: line-through !important;
+  margin-right: 8px !important;
+}
+.hauled-cotizar-price {
+  color: var(--h-blue, #4CC9F0) !important;
+  font-size: 1.2rem !important;
+}
+
+/* Size selector */
+.tp-product-details-variation-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: var(--h-fs-small, 0.82rem) !important;
+  letter-spacing: var(--h-ls-label, 4px) !important;
+  text-transform: uppercase !important;
+  color: var(--h-black, #111) !important;
+  margin-bottom: 12px !important;
+}
+.tp-size-variation-btn {
+  min-width: 44px !important;
+  height: 44px !important;
+  border: 1px solid rgba(0,0,0,0.15) !important;
+  border-radius: 4px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
+  color: var(--h-black, #111) !important;
+  background: #fff !important;
+  cursor: pointer;
+  transition: all var(--h-dur-fast, 180ms) !important;
+  padding: 0 10px !important;
+}
+.tp-size-variation-btn:hover,
+.tp-size-variation-btn.active {
+  background: var(--h-black, #111) !important;
+  color: #fff !important;
+  border-color: var(--h-black, #111) !important;
+}
+
+/* Add to cart button */
+.tp-product-details-add-btn,
+.tp-product-details-add-to-cart-btn {
+  width: 100% !important;
+  background: var(--h-blue, #4CC9F0) !important;
+  color: #111 !important;
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  height: 52px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  transition: background var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms) !important;
+}
+.tp-product-details-add-btn:hover,
+.tp-product-details-add-to-cart-btn:hover {
+  background: var(--h-black, #111) !important;
+  color: #fff !important;
+}
+
+/* Review stars */
+.tp-product-details-rating i { color: var(--h-blue, #4CC9F0) !important; }
+
+/* Encargo info */
+.hauled-encargo-info {
+  background: rgba(76,201,240,0.06);
+  border: 1px solid rgba(76,201,240,0.2);
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+}
+.hauled-encargo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--h-fs-small, 0.85rem);
+  color: rgba(0,0,0,0.6);
+  margin-bottom: 8px;
+}
+.hauled-encargo-row:last-child { margin-bottom: 0; }
+.hauled-text-toggle {
+  color: var(--h-blue, #4CC9F0);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--h-fs-small, 0.85rem);
+  margin-left: 4px;
+}
+.hauled-size-guide {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.72rem !important;
+  color: var(--h-blue, #4CC9F0) !important;
+  cursor: pointer;
+  margin-left: 8px !important;
+  text-decoration: underline;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+/* Mobile sticky CTA */
+@media (max-width: 767px) {
+  .tp-product-details-add-btn-wrap,
+  .tp-product-details-action-sm {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+    background: #fff !important;
+    border-top: 1px solid rgba(0,0,0,0.08) !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08) !important;
+  }
+}
+</style>
+
 <style scoped>
 .hauled-encargo-info {
   background: #f4f4f4;

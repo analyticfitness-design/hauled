@@ -150,3 +150,79 @@ watch(
   }
 );
 </script>
+
+<style>
+/* ── HAULED Shop Styles ───────────────────────────── */
+.tp-shop-area {
+  background: var(--h-white, #fff);
+  padding-bottom: clamp(60px, 8vw, 120px);
+}
+.tp-shop-top-result p {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--h-fs-small, 0.82rem);
+  color: rgba(0,0,0,0.45);
+}
+.tp-shop-top-tab .nav-link {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 4px;
+  color: rgba(0,0,0,0.4);
+  padding: 7px 11px;
+  transition: all var(--h-dur-fast, 180ms);
+}
+.tp-shop-top-tab .nav-link.active,
+.tp-shop-top-tab .nav-link:hover {
+  background: var(--h-black, #111);
+  border-color: var(--h-black, #111);
+  color: #fff;
+}
+
+/* Product card */
+.tp-product-item-2 {
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--h-shadow-card, 0 4px 20px rgba(0,0,0,0.06));
+  transition: box-shadow var(--h-dur-med, 320ms), transform var(--h-dur-med, 320ms);
+}
+.tp-product-item-2:hover {
+  box-shadow: var(--h-shadow-hover, 0 12px 40px rgba(0,0,0,0.12));
+  transform: translateY(-3px);
+}
+.tp-product-item-2 .tp-product-title a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: var(--h-black, #111);
+  font-size: var(--h-fs-body, 0.9rem);
+}
+.tp-product-item-2 .tp-product-price span,
+.tp-product-item-2 .new-price {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--h-black, #111) !important;
+}
+
+/* Sidebar */
+.tp-shop-widget {
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 22px;
+  margin-bottom: 18px;
+}
+.tp-shop-widget-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: var(--h-fs-label, 0.72rem);
+  letter-spacing: var(--h-ls-label, 4px);
+  text-transform: uppercase;
+  color: var(--h-black, #111);
+}
+
+/* Fix iOS input zoom */
+.tp-shop-widget input,
+.tp-shop-widget select {
+  font-size: 16px;
+}
+</style>

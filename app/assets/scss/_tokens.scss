@@ -1,0 +1,54 @@
+// ══════════════════════════════════════════════════
+//  HAULED Design Tokens — CSS Custom Properties
+// ══════════════════════════════════════════════════
+:root {
+  // ── Colors ──────────────────────────────────────
+  --h-black:        #111111;
+  --h-blue:         #4CC9F0;
+  --h-white:        #FFFFFF;
+  --h-grey:         #F4F4F4;
+  --h-navy:         #0d2233;
+  --h-muted:        rgba(255, 255, 255, 0.60);
+  --h-muted-dark:   rgba(0, 0, 0, 0.45);
+  --h-border-dark:  rgba(255, 255, 255, 0.10);
+  --h-border-light: rgba(0, 0, 0, 0.10);
+
+  // ── Typography sizes (clamp = responsive) ───────
+  --h-fs-display: clamp(2.8rem, 10vw, 6.5rem);
+  --h-fs-h1:      clamp(2rem, 6vw, 3.5rem);
+  --h-fs-h2:      clamp(1.4rem, 4vw, 2.2rem);
+  --h-fs-h3:      clamp(1.1rem, 3vw, 1.5rem);
+  --h-fs-body:    clamp(0.875rem, 3.5vw, 1rem);
+  --h-fs-small:   0.82rem;
+  --h-fs-label:   0.72rem;
+
+  // ── Letter spacing ───────────────────────────────
+  --h-ls-display: -2px;
+  --h-ls-title:    3px;
+  --h-ls-label:    4px;
+  --h-ls-logo:    10px;
+  --h-ls-sub:      7px;
+
+  // ── Spacing ──────────────────────────────────────
+  --h-section-py: clamp(60px, 8vw, 120px);
+  --h-gap-grid:   clamp(12px, 2vw, 24px);
+
+  // ── Transitions ──────────────────────────────────
+  --h-ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --h-dur-fast: 180ms;
+  --h-dur-med:  320ms;
+
+  // ── Shadows ──────────────────────────────────────
+  --h-shadow-card:  0 4px 20px rgba(0, 0, 0, 0.08);
+  --h-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+// ── Scroll animation keyframe (global) ──────────────
+@keyframes hauled-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hauled-animate {
+  animation: hauled-fade-up 0.5s var(--h-ease) both;
+}

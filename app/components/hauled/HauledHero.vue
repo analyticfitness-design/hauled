@@ -1,198 +1,256 @@
 <template>
-  <section class="hauled-hero">
-    <div class="container">
-      <div class="hauled-hero-inner">
+  <section class="h-hero" ref="heroRef">
+    <div class="h-hero-bg">
+      <div class="h-hero-img-wrap">
+        <img
+          src="/img/products/gasp/gasp-tactical-backpack-1.jpg"
+          alt="HAULED — Direct from the States"
+          class="h-hero-img"
+        />
+        <div class="h-hero-img-overlay" />
+      </div>
+    </div>
 
-        <!-- Left: text -->
-        <div class="hauled-hero-text">
-          <span class="hauled-hero-tag">✈️ Direct from the States</span>
-          <h1 class="hauled-hero-title">
-            Ropa Original<br>
-            <span class="hauled-hero-accent">de USA</span><br>
-            para Colombia
-          </h1>
-          <p class="hauled-hero-sub">
-            Nike, Gap, Tommy, Jordan y más. Originales, sin intermediarios.<br>
-            También hacemos encargos a pedido — tú eliges, nosotros traemos.
-          </p>
-          <div class="hauled-hero-ctas">
-            <nuxt-link to="/shop?hauledLine=originals" class="hauled-btn-primary">Ver Originals</nuxt-link>
-            <nuxt-link to="/shop?hauledLine=encargo" class="hauled-btn-outline">Hacer Encargo</nuxt-link>
-          </div>
-          <div class="hauled-hero-trust">
-            <span>✅ Producto 100% original</span>
-            <span>🚚 Envío a todo Colombia</span>
-            <span>💬 Soporte WhatsApp</span>
-          </div>
+    <div class="container h-hero-container">
+      <div class="h-hero-content" :class="{ 'h-hero-content--visible': visible }">
+
+        <!-- Eyebrow -->
+        <p class="h-hero-eyebrow">
+          <span class="h-eyebrow-line" />
+          Direct from the States
+        </p>
+
+        <!-- Título display -->
+        <h1 class="h-hero-title">
+          Moda<br>
+          <span class="h-hero-title--accent">Original</span><br>
+          de USA
+        </h1>
+
+        <!-- Sub -->
+        <p class="h-hero-sub">
+          Nike, Jordan, Gap, Tommy, GASP — prendas auténticas traídas directamente
+          desde outlets de Estados Unidos. Envío a todo Colombia.
+        </p>
+
+        <!-- CTAs -->
+        <div class="h-hero-ctas">
+          <nuxt-link to="/shop" class="h-btn-primary">Ver catálogo</nuxt-link>
+          <a
+            :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola HAULED, quiero hacer un encargo 📦')}`"
+            target="_blank"
+            class="h-btn-ghost"
+          >Hacer encargo →</a>
         </div>
 
-        <!-- Right: featured product visual -->
-        <div class="hauled-hero-visual">
-          <div class="hauled-hero-badge-float">NEW IN</div>
-          <div class="hauled-hero-img-wrap">
-            <img
-              src="/img/products/originals/hero-collection.jpg"
-              alt="HAULED — Ropa USA Original"
-              class="hauled-hero-img"
-              @error="onImgError"
-            />
-            <div class="hauled-hero-img-fallback" v-if="imgError">
-              <span class="hauled-hero-logo-large">HAULED</span>
-              <span class="hauled-hero-logo-sub">Direct from the States</span>
-            </div>
-          </div>
+        <!-- Badges de confianza -->
+        <div class="h-hero-trust">
+          <span class="h-trust-item">✦ Autenticidad garantizada</span>
+          <span class="h-trust-item">✦ Envío nacional</span>
+          <span class="h-trust-item">✦ Pago seguro</span>
         </div>
 
       </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="h-scroll-indicator" aria-hidden="true">
+      <span class="h-scroll-line" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-const imgError = ref(false);
-const onImgError = () => { imgError.value = true; };
+const config = useRuntimeConfig();
+const whatsappNumber = config.public.whatsappNumber as string;
+
+const heroRef = ref<HTMLElement | null>(null);
+const visible = ref(false);
+
+onMounted(() => {
+  requestAnimationFrame(() => { visible.value = true; });
+});
 </script>
 
 <style scoped>
-.hauled-hero {
-  background: #fff;
-  padding: 80px 0 60px;
-  border-bottom: 1px solid #e8e8e8;
-}
-.hauled-hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+/* ── Hero base ────────────────────────────────────── */
+.h-hero {
+  position: relative;
+  min-height: 100svh;
+  background: var(--h-black, #111);
+  display: flex;
   align-items: center;
-}
-@media (max-width: 768px) {
-  .hauled-hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hauled-hero { padding: 40px 0 40px; }
-}
-.hauled-hero-tag {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #4cc9f0;
-  border: 1px solid #4cc9f0;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-}
-.hauled-hero-title {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  line-height: 1.05;
-  letter-spacing: 2px;
-  color: #111;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-.hauled-hero-accent { color: #4cc9f0; }
-.hauled-hero-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #555;
-  margin-bottom: 32px;
-  max-width: 440px;
-}
-.hauled-hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-}
-.hauled-btn-primary {
-  background: #4cc9f0;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 14px 32px;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.hauled-btn-primary:hover { background: #0099cc; color: #fff; }
-.hauled-btn-outline {
-  background: transparent;
-  color: #111;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 14px 32px;
-  border-radius: 4px;
-  border: 2px solid #111;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.hauled-btn-outline:hover { background: #111; color: #fff; }
-.hauled-hero-trust {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  color: #888;
-}
-/* Visual side */
-.hauled-hero-visual { position: relative; }
-.hauled-hero-badge-float {
-  position: absolute;
-  top: -10px;
-  right: 20px;
-  background: #4cc9f0;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  padding: 6px 14px;
-  z-index: 2;
-}
-.hauled-hero-img-wrap {
-  background: #f4f4f4;
-  border-radius: 8px;
   overflow: hidden;
-  aspect-ratio: 4/5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.hauled-hero-img {
+
+/* ── Background image ─────────────────────────────── */
+.h-hero-bg { position: absolute; inset: 0; }
+.h-hero-img-wrap {
+  position: absolute;
+  inset: 0;
+  left: 42%;
+}
+.h-hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
-.hauled-hero-img-fallback {
+.h-hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--h-black, #111) 15%,
+    rgba(17,17,17,0.75) 55%,
+    rgba(17,17,17,0.25) 100%
+  );
+}
+@media (max-width: 991px) {
+  .h-hero-img-wrap { left: 0; }
+  .h-hero-img-overlay { background: rgba(17,17,17,0.78); }
+}
+
+/* ── Content ──────────────────────────────────────── */
+.h-hero-container {
+  position: relative;
+  z-index: 2;
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: clamp(80px, 10vw, 120px);
+}
+.h-hero-content {
+  max-width: 580px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s var(--h-ease, ease), transform 0.75s var(--h-ease, ease);
+}
+.h-hero-content--visible { opacity: 1; transform: translateY(0); }
+
+/* ── Eyebrow ──────────────────────────────────────── */
+.h-hero-eyebrow {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 40px;
+  gap: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: var(--h-fs-label, 0.72rem);
+  letter-spacing: var(--h-ls-sub, 7px);
+  color: var(--h-blue, #4CC9F0);
+  text-transform: uppercase;
+  margin-bottom: 22px;
 }
-.hauled-hero-logo-large {
+.h-eyebrow-line {
+  display: inline-block;
+  width: 44px;
+  height: 2px;
+  background: var(--h-blue, #4CC9F0);
+  flex-shrink: 0;
+}
+
+/* ── Title ────────────────────────────────────────── */
+.h-hero-title {
   font-family: 'Raleway', sans-serif;
   font-weight: 900;
-  font-size: 3rem;
-  letter-spacing: 8px;
-  color: #4cc9f0;
-}
-.hauled-hero-logo-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 3px;
-  color: #999;
+  font-size: var(--h-fs-display, clamp(2.8rem, 10vw, 6.5rem));
+  line-height: 0.9;
+  letter-spacing: var(--h-ls-display, -2px);
+  color: #fff;
+  margin-bottom: 28px;
   text-transform: uppercase;
+}
+.h-hero-title--accent { color: var(--h-blue, #4CC9F0); }
+
+/* ── Sub ──────────────────────────────────────────── */
+.h-hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--h-fs-body, 1rem);
+  line-height: 1.7;
+  color: var(--h-muted, rgba(255,255,255,0.6));
+  max-width: 420px;
+  margin-bottom: 36px;
+}
+
+/* ── CTAs ─────────────────────────────────────────── */
+.h-hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.h-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--h-blue, #4CC9F0);
+  color: #111;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 34px;
+  border-radius: 4px;
+  text-decoration: none;
+  min-height: 50px;
+  transition: background var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms);
+}
+.h-btn-primary:hover { background: #fff; color: #111; }
+.h-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 1px;
+  padding: 15px 26px;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 4px;
+  text-decoration: none;
+  min-height: 50px;
+  transition: border-color var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms);
+}
+.h-btn-ghost:hover { border-color: var(--h-blue, #4CC9F0); color: var(--h-blue, #4CC9F0); }
+
+/* ── Trust badges ─────────────────────────────────── */
+.h-hero-trust { display: flex; gap: 22px; flex-wrap: wrap; }
+.h-trust-item {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--h-fs-label, 0.72rem);
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Scroll indicator ─────────────────────────────── */
+.h-scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.h-scroll-line {
+  display: block;
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, transparent, var(--h-blue, #4CC9F0));
+  margin: auto;
+  animation: scrollPulse 2.2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%   { opacity: 0; transform: scaleY(0.2); transform-origin: top; }
+  50%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: top; }
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 575px) {
+  .h-hero { min-height: 88svh; }
+  .h-hero-ctas { flex-direction: column; gap: 10px; }
+  .h-btn-primary, .h-btn-ghost { width: 100%; }
+  .h-hero-trust { gap: 10px; }
+  .h-hero-sub { max-width: 100%; }
 }
 </style>
