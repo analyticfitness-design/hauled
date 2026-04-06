@@ -1,26 +1,44 @@
-# Nuxt dev/build outputs
+# ═══ Nuxt build outputs ═══
 .output
 .nuxt
 .nitro
 .cache
 dist
 
-# Node dependencies
+# ═══ Node ═══
 node_modules
-
-# Logs
-logs
 *.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Misc
-.DS_Store
-.fleet
-.idea
-
-# Local env files
+# ═══ Local env (NUNCA commitear secrets) ═══
 .env
 .env.*
 !.env.example
 
-# Vercel (generado por máquina, no commitear)
+# ═══ OS ═══
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ═══ Editores ═══
+.idea
+.vscode
+.fleet
+*.swp
+*.swo
+
+# ═══ Claude Code / MCP local ═══
+.claude/
+.mcp.json
+.playwright-mcp/
+
+# ═══ Vercel (legacy) ═══
 .vercel/
+
+# ═══ Carpetas locales no productivas ═══
+_workflows_pending/
+docs/
+GUIA-DEPLOY-HAULED.html

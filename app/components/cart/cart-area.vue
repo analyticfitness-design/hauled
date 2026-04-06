@@ -75,9 +75,9 @@
               <h4 class="tp-cart-checkout-shipping-title">Envío</h4>
               <div class="tp-cart-checkout-shipping-option-wrapper">
                 <div class="tp-cart-checkout-shipping-option">
-                  <input id="envio_bogota" type="radio" name="shipping" />
-                  <label @click="handleShippingCost(15000)" for="envio_bogota">
-                    Bogotá: <span>{{ formatPrice(15000) }}</span>
+                  <input id="envio_bucaramanga" type="radio" name="shipping" />
+                  <label @click="handleShippingCost(0)" for="envio_bucaramanga">
+                    Bucaramanga: <span>Gratis</span>
                   </label>
                 </div>
                 <div class="tp-cart-checkout-shipping-option">
@@ -89,7 +89,7 @@
                 <div class="tp-cart-checkout-shipping-option">
                   <input id="envio_gratis" type="radio" name="shipping" />
                   <label @click="handleShippingCost(0)" for="envio_gratis">
-                    Gratis (pedidos +$300.000)
+                    Nacional gratis (+$300.000)
                   </label>
                 </div>
               </div>

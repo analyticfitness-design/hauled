@@ -1,0 +1,197 @@
+// ══════════════════════════════════════════════════
+//  HAULED Inner Pages — Bootstrap/Template Overrides
+// ══════════════════════════════════════════════════
+
+// ── Hide original breadcrumb (reemplazado por HauledPageHeader) ──
+.breadcrumb__area { display: none !important; }
+
+// ── Botones primarios ──────────────────────────────
+.tp-btn,
+.tp-cart-btn,
+.tp-checkout-btn {
+  background-color: #4CC9F0 !important;
+  color: #111111 !important;
+  border-color: #4CC9F0 !important;
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  transition: background-color 160ms ease, color 160ms ease !important;
+  &:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border-color: #111111 !important;
+  }
+}
+.tp-btn-border,
+.tp-btn-border-primary {
+  background-color: transparent !important;
+  color: #4CC9F0 !important;
+  border: 1px solid #4CC9F0 !important;
+  &:hover { background-color: #4CC9F0 !important; color: #111111 !important; }
+}
+
+// ── Inputs / Textareas ─────────────────────────────
+.tp-contact-input input,
+.tp-contact-input textarea,
+.tp-checkout-input input,
+.tp-checkout-input textarea,
+.tp-checkout-input select,
+.tp-login-input input,
+.tp-register-input input {
+  background-color: #F4F4F4 !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  color: #111111 !important;
+  border-radius: 4px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  transition: border-color 160ms, box-shadow 160ms !important;
+  &:focus {
+    border-color: #4CC9F0 !important;
+    box-shadow: 0 0 0 3px rgba(76,201,240,0.15) !important;
+    background-color: #ffffff !important;
+  }
+  &::placeholder { color: rgba(0,0,0,0.35) !important; }
+}
+
+.tp-contact-input-title label,
+.tp-checkout-input label,
+.tp-login-input label,
+.tp-register-input label {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: rgba(0,0,0,0.5) !important;
+}
+
+// ── Fondos de secciones ────────────────────────────
+.tp-shop-area,
+.tp-cart-area,
+.tp-checkout-area,
+.tp-wishlist-area,
+.tp-login-area,
+.tp-register-area { background-color: #F4F4F4; }
+
+// ── Shop sidebar ───────────────────────────────────
+.tp-shop-sidebar {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 8px !important;
+  padding: 24px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+}
+.tp-shop-widget-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  color: #111111 !important;
+}
+
+// ── Cart table ─────────────────────────────────────
+.tp-cart-table {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  thead {
+    background: #111111 !important;
+    th {
+      font-family: 'Raleway', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      border: none !important;
+      padding: 16px 20px !important;
+    }
+  }
+  tbody td {
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+    padding: 20px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #111111 !important;
+    background: #ffffff !important;
+  }
+}
+.tp-cart-subtotal-table {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+// ── Product cards ──────────────────────────────────
+.tp-product-item {
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  transition: box-shadow 220ms ease !important;
+  &:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12) !important; }
+}
+.tp-product-title a {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  color: #111111 !important;
+  &:hover { color: #4CC9F0 !important; }
+}
+.tp-product-price span {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 700 !important;
+  color: #111111 !important;
+}
+
+// ── 404 ───────────────────────────────────────────
+.tp-error-area { background: #F4F4F4; }
+.tp-error-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: #111111 !important;
+}
+.tp-error-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #4CC9F0 !important;
+  color: #111111 !important;
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  padding: 14px 36px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  transition: background 160ms !important;
+  &:hover { background: #111111 !important; color: #ffffff !important; }
+}
+
+// ── Checkout / Login cards ─────────────────────────
+.tp-order-info-list {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+.tp-login-wrapper,
+.tp-register-wrapper {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+}
+.tp-login-title,
+.tp-register-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: #111111 !important;
+}

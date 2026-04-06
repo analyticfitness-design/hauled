@@ -4,7 +4,7 @@
         <div class="col-xxl-6 col-md-6">
             <div class="profile__input-box">
               <div class="profile__input">
-                  <input type="text" placeholder="Enter your username" value="Shahnewaz Sakil">
+                  <input type="text" placeholder="Tu nombre" value="">
                   <span>
                     <svg-user-3/>
                   </span>
@@ -95,10 +95,10 @@
 
 <script setup lang="ts">
 const changeHandler = (e: { value: string; text: string }, index: number) => {
-  console.log(e);
+  // ignore validation error
 };
 const handleSubmit = () => {
-  console.log('submitted')
+  // form submitted
 }
 </script>
 

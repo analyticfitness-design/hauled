@@ -52,7 +52,7 @@ export default defineNuxtConfig({
     // Públicas (disponibles en cliente)
     public: {
       wompiPublicKey: process.env.WOMPI_PUBLIC_KEY ?? 'pub_test_XXXXXXXX',
-      appUrl: process.env.APP_URL ?? 'http://localhost:3000',
+      appUrl: process.env.APP_URL ?? 'https://hauled.shop',
       whatsappNumber: process.env.WHATSAPP_NUMBER ?? '573000000000',
     },
   },
@@ -69,7 +69,6 @@ export default defineNuxtConfig({
 
   css: [
     "~/assets/css/font-awesome-pro.css",
-    "~/assets/css/flaticon_shofy.css",
     "~/assets/scss/main.scss",
   ]
 })

@@ -1,17 +1,11 @@
 <template>
   <div>
-      <!-- breadcrumb start -->
-      <breadcrumb-4 title="Checkout" subtitle="Checkout" :bg_clr="true"/>
-      <!-- breadcrumb end -->
-
-      <!-- checkout area start -->
-      <checkout-area/>
-      <!-- checkout area end -->
+    <hauled-page-header title="Pago" eyebrow="Finaliza tu pedido" subtitle="Checkout" :center="true" />
+    <checkout-area/>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Checkout Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Checkout — Finalizar pedido' });
 </script>
-
-

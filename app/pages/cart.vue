@@ -1,15 +1,11 @@
 <template>
   <div>
-      <!-- breadcrumb start -->
-      <breadcrumb-4 title="Shopping Cart" subtitle="Shopping Cart"/>
-      <!-- breadcrumb end -->
-
-      <!-- cart area start -->
-      <cart-area/>
-      <!-- cart area end -->
+    <hauled-page-header title="Carrito" eyebrow="Tu selección" subtitle="Carrito de compras" />
+    <cart-area/>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Cart Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Carrito de compras' });
 </script>

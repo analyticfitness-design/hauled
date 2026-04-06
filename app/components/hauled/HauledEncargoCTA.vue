@@ -1,5 +1,5 @@
 <template>
-  <section class="hauled-encargo-cta">
+  <section class="hauled-encargo-cta" :style="{ backgroundImage: `url('/img/hero/section-gym-bg.jpg')` }">
     <div class="container">
       <div class="hauled-encargo-inner">
         <div class="hauled-encargo-text">
@@ -24,10 +24,10 @@
           >
             💬 Iniciar encargo por WhatsApp
           </a>
-          <nuxt-link to="/shop?hauledLine=encargo" class="hauled-catalog-cta">
+          <nuxt-link to="/encargos" class="hauled-catalog-cta">
             Ver catálogo de encargos
           </nuxt-link>
-          <p class="hauled-encargo-note">Respuesta en menos de 2 horas en horario hábil</p>
+          <p class="hauled-encargo-note">Respondemos siempre · 24/7 · Envío gratis en Bucaramanga</p>
         </div>
       </div>
     </div>
@@ -42,9 +42,21 @@ const whatsappNumber = config.public.whatsappNumber as string;
 <style scoped>
 .hauled-encargo-cta {
   padding: var(--h-section-py, 80px) 0;
-  background: var(--h-navy, #0d2233);
+  background-color: var(--h-navy, #0d2233);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hauled-encargo-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 34, 51, 0.88);
+  z-index: 0;
 }
 .hauled-encargo-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: clamp(32px, 5vw, 60px);

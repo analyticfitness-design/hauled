@@ -3,7 +3,7 @@
       <div class="tp-contact-input-wrapper">
         <div class="tp-contact-input-box">
             <div class="tp-contact-input">
-              <input name="name" id="name" type="text" placeholder="Shahnewaz Sakil" v-bind="name">
+              <input name="name" id="name" type="text" placeholder="Equipo HAULED" v-bind="name">
             </div>
             <div class="tp-contact-input-title">
               <label for="name">Your Name</label>

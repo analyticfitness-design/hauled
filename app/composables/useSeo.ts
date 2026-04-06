@@ -80,8 +80,8 @@ export function useSeo(options: SeoOptions = {}) {
             '@type': 'Organization',
             name: 'HAULED',
             url: baseUrl,
-            logo: `${baseUrl}/img/logo/hauled-logo.png`,
-            description: 'Tienda de ropa de USA para Colombia. Originals, Basics y Encargos a pedido.',
+            logo: `${baseUrl}/img/logo/logo.svg`,
+            description: 'Tienda de ropa de USA para Colombia. GASP, Nike, Jordan y más. Encargos a pedido. Envío gratis en Bucaramanga.',
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'customer service',

@@ -14,7 +14,7 @@
                 name="name"
                 id="name"
                 type="text"
-                placeholder="Shahnewaz Sakil"
+                placeholder="Equipo HAULED"
                 v-bind="name"
               />
             </div>

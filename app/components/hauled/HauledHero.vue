@@ -3,7 +3,7 @@
     <div class="h-hero-bg">
       <div class="h-hero-img-wrap">
         <img
-          src="/img/products/gasp/gasp-tactical-backpack-1.jpg"
+          :src="heroImg"
           alt="HAULED — Direct from the States"
           class="h-hero-img"
         />
@@ -64,6 +64,7 @@
 const config = useRuntimeConfig();
 const whatsappNumber = config.public.whatsappNumber as string;
 
+const heroImg = '/img/hero/gasp-hero-1.jpg';
 const heroRef = ref<HTMLElement | null>(null);
 const visible = ref(false);
 
@@ -101,9 +102,9 @@ onMounted(() => {
   inset: 0;
   background: linear-gradient(
     to right,
-    var(--h-black, #111) 15%,
-    rgba(17,17,17,0.75) 55%,
-    rgba(17,17,17,0.25) 100%
+    var(--h-black, #111) 20%,
+    rgba(17,17,17,0.65) 52%,
+    rgba(17,17,17,0.15) 100%
   );
 }
 @media (max-width: 991px) {

@@ -1,15 +1,11 @@
 <template>
   <div>
-      <!-- breadcrumb start -->
-      <breadcrumb-4 title="Wishlist" subtitle="Wishlist"/>
-      <!-- breadcrumb end -->
-
-      <!-- wishlist area start -->
-      <wishlist-area/>
-      <!-- wishlist area end -->
+    <hauled-page-header title="Lista de deseos" eyebrow="Guardado para después" subtitle="Lista de deseos" />
+    <wishlist-area/>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Wishlist Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Lista de deseos' });
 </script>

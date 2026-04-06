@@ -54,4 +54,5 @@ export interface IProduct {
   hauledLine?: 'originals' | 'basics' | 'encargo';
   deliveryDays?: string;
   advancePercent?: number;
+  priceUsd?: number; // precio retail USD original
 }

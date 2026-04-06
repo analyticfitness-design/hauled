@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+Allow: /shop
+Allow: /encargos
+Allow: /contact
+Allow: /about
+Allow: /product-details/
+
+# Páginas internas (no indexar)
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /forgot
+Disallow: /profile
+Disallow: /order
+Disallow: /wishlist
+Disallow: /admin
+Disallow: /search
+
+# Páginas legacy del template (no indexar)
+Disallow: /home-2
+Disallow: /home-3
+Disallow: /home-4
+Disallow: /blog
+Disallow: /blog-grid
+Disallow: /blog-list
+Disallow: /blog-details
+Disallow: /blog-details-2
+Disallow: /compare
+Disallow: /coupons
+Disallow: /shop-1600
+Disallow: /shop-categories
+Disallow: /shop-filter-dropdown
+Disallow: /shop-filter-offcanvas
+Disallow: /shop-full-width
+Disallow: /shop-list
+Disallow: /shop-load-more
+Disallow: /shop-no-sidebar
+Disallow: /shop-right-sidebar
+Disallow: /product-details-countdown
+Disallow: /product-details-gallery
+Disallow: /product-details-list
+Disallow: /product-details-slider
+Disallow: /product-details-swatches
+Disallow: /product-details-video
+
+Sitemap: https://hauled.shop/sitemap.xml

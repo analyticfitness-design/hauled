@@ -76,12 +76,12 @@ const form = reactive({
 });
 
 const ciudades = [
+  { value: 'bucaramanga', text: 'Bucaramanga (envío gratis)' },
   { value: 'bogota', text: 'Bogotá' },
   { value: 'medellin', text: 'Medellín' },
   { value: 'cali', text: 'Cali' },
   { value: 'barranquilla', text: 'Barranquilla' },
   { value: 'cartagena', text: 'Cartagena' },
-  { value: 'bucaramanga', text: 'Bucaramanga' },
   { value: 'pereira', text: 'Pereira' },
   { value: 'manizales', text: 'Manizales' },
   { value: 'cucuta', text: 'Cúcuta' },

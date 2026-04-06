@@ -1,15 +1,11 @@
 <template>
   <div>
-      <!-- breadcrumb start -->
-      <breadcrumb-4 title="My account" subtitle="My account" :center="true" />
-      <!-- breadcrumb end -->
-
-      <!-- login area start -->
-      <login-area/>
-      <!-- login area end -->
+    <hauled-page-header title="Mi cuenta" eyebrow="Accede a tu cuenta" subtitle="Iniciar sesión" :center="true" />
+    <login-area/>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Login Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Iniciar sesión' });
 </script>

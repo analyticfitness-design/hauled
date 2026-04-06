@@ -3,18 +3,19 @@
     <form @submit.prevent="handleSubmit">
       <div class="tp-header-search-wrapper d-flex align-items-center">
         <div class="tp-header-search-box">
-          <input type="text" placeholder="Search for Products..." v-model="searchText" />
+          <input type="text" placeholder="Buscar productos GASP..." v-model="searchText" />
         </div>
         <div class="tp-header-search-category">
           <ui-nice-select
             :options="[
-              { value: 'select-category', text: 'Select Category' },
-              { value: 'electronics', text: 'Electronics' },
-              { value: 'fashion', text: 'Fashion' },
-              { value: 'beauty', text: 'Beauty' },
-              { value: 'jewelry', text: 'Jewelry' },
+              { value: '', text: 'Categoría' },
+              { value: 'tops', text: 'Tops' },
+              { value: 'shorts', text: 'Shorts' },
+              { value: 'pantalones', text: 'Pantalones' },
+              { value: 'hoodies', text: 'Hoodies' },
+              { value: 'accesorios', text: 'Accesorios' },
             ]"
-            name="Select Category"
+            name="Categoría"
             :default-current="0"
             @onChange="changeHandler"
           />

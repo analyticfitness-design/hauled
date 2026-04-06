@@ -4,7 +4,7 @@
       <span>
         <SvgDropdown />
       </span>
-      All Categories 
+      Categorías
     </button>
     <Transition>
       <nav v-if="isActive" class="tp-category-menu-content" :class="{ active: isActive }">
@@ -37,7 +37,7 @@
 import category_data from "@/data/category-data";
 const router = useRouter();
 const category_items = category_data.filter(
-  (c) => c.productType === "electronics"
+  (c) => c.productType === "fashion"
 );
 let isActive = ref<boolean>(false);
 // handle active

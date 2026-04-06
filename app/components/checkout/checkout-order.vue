@@ -47,8 +47,8 @@
           <span>Envío</span>
           <div class="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
             <span>
-              <input id="envio_bog" type="radio" name="shipping" />
-              <label @click="handleShippingCost(15000)" for="envio_bog">Bogotá: <span>{{ formatPrice(15000) }}</span></label>
+              <input id="envio_bga" type="radio" name="shipping" />
+              <label @click="handleShippingCost(0)" for="envio_bga">Bucaramanga: <span>Gratis</span></label>
             </span>
             <span>
               <input id="envio_nac" type="radio" name="shipping" />
@@ -56,7 +56,7 @@
             </span>
             <span>
               <input id="envio_free" type="radio" name="shipping" />
-              <label @click="handleShippingCost(0)" for="envio_free">Gratis (+$300.000)</label>
+              <label @click="handleShippingCost(0)" for="envio_free">Nacional gratis (+$300.000)</label>
             </span>
           </div>
         </li>

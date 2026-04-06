@@ -53,7 +53,7 @@
         <div
           class="offcanvas__footer d-flex align-items-center justify-content-between"
         >
-          <p class="hoff-footer-note">Bogotá, Colombia · hola@hauled.shop</p>
+          <p class="hoff-footer-note">Bucaramanga, Colombia · 24/7 · info@hauled.shop</p>
         </div>
       </div>
     </div>

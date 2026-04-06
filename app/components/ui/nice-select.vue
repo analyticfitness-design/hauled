@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[`nice-select ${className}`, { open: open }]"
+    :class="['nice-select', className, { open: open }]"
     tabindex="0"
     @click.prevent="open = !open"
     role="button"

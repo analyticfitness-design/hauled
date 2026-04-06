@@ -23,19 +23,26 @@ const route = useRoute()
 
 const productStore = useProductStore();
 
-let product = ref<IProduct | undefined>();
+// SSR-safe lookup: ejecuta inmediatamente para que el HTML server-rendered
+// incluya meta tags y Schema.org JSON-LD para Google.
+const product = ref<IProduct | undefined>(
+  product_data.find(b => b.id === route.params.id || b.slug === route.params.id)
+);
+
+if (product.value) {
+  useSeo({
+    title: product.value.title,
+    description: product.value.description?.substring(0, 155),
+    image: product.value.img,
+    type: 'product',
+    precio: product.value.price > 0 ? product.value.price : undefined,
+    disponibilidad: (product.value.quantity ?? 1) > 0 ? 'in stock' : 'out of stock',
+  });
+}
+
 onMounted(() => {
-  product.value = product_data.find(b => b.id === route.params.id);
   if (product.value) {
     productStore.activeImg = product.value.img;
-    useSeo({
-      title: product.value.title,
-      description: product.value.description?.substring(0, 155),
-      image: product.value.img,
-      type: 'product',
-      precio: product.value.price > 0 ? product.value.price : undefined,
-      disponibilidad: (product.value.quantity ?? 1) > 0 ? 'in stock' : 'out of stock',
-    });
   }
 });
 </script>

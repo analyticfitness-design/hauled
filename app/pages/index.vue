@@ -1,16 +1,22 @@
 <template>
   <div>
     <nuxt-layout name="layout-one">
-      <!-- Hero principal HAULED -->
+      <!-- Hero principal HAULED — gasp-hero-1.jpg -->
       <hauled-hero />
 
-      <!-- Las 3 líneas de producto -->
+      <!-- Las 3 líneas de producto — fondo blanco -->
       <hauled-lines />
 
-      <!-- Productos destacados / nuevos -->
+      <!-- Banner split GASP: gasp-zz-4 + gasp-hero-launch -->
+      <hauled-banner />
+
+      <!-- Productos GASP destacados — fondo gris claro -->
       <hauled-featured />
 
-      <!-- CTA Encargos -->
+      <!-- Lookbook GASP — galería dark con gasp-zz-* -->
+      <hauled-lookbook />
+
+      <!-- CTA Encargos — navy + foto de fondo -->
       <hauled-encargo-c-t-a />
 
       <!-- Subscribe -->

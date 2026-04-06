@@ -8,7 +8,6 @@ export const useProductFilterStore = defineStore("product_filter", () => {
   let selectVal = ref<string>("");
 
   const handleSelectFilter = (e: { value: string; text: string }) => {
-    console.log('handle select',e)
     selectVal.value = e.value;
   }
 

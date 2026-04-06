@@ -44,6 +44,6 @@
 
 <script setup lang="ts">
 const handleSubmit = () => {
-  console.log('submitted')
+  // form submitted
 }
 </script>

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- breadcrumb start -->
-    <breadcrumb-1 title="Search Products" subtitle="Search Products" />
-    <!-- breadcrumb end -->
+    <hauled-page-header title="Búsqueda" eyebrow="Resultados" subtitle="Buscar productos" />
 
     <!-- shop area start -->
     <section class="tp-shop-area pb-120">
@@ -73,7 +71,8 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Search Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Buscar productos' });
 
 import { ref } from "vue";
 import product_data from "@/data/product-data";

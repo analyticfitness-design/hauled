@@ -57,6 +57,6 @@ const openLogin = ref<boolean>(false);
 const openCoupon = ref<boolean>(false);
 
 const handleSubmit = () => {
-  console.log("submitted");
+  // form submitted
 };
 </script>

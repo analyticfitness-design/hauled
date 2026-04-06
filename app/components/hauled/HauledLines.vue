@@ -36,7 +36,7 @@
         </nuxt-link>
 
         <!-- Encargos -->
-        <nuxt-link to="/shop?hauledLine=encargo" class="hl-card hl-card--encargo">
+        <nuxt-link to="/encargos" class="hl-card hl-card--encargo">
           <div class="hl-card-inner">
             <span class="hl-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -57,7 +57,7 @@
 <style scoped>
 .hl-section {
   padding: var(--h-section-py, 80px) 0;
-  background: var(--h-black, #111);
+  background: #fff;
 }
 .hl-header {
   text-align: center;
@@ -78,7 +78,7 @@
   font-size: var(--h-fs-h2, clamp(1.4rem, 4vw, 2.2rem));
   letter-spacing: var(--h-ls-title, 3px);
   text-transform: uppercase;
-  color: #fff;
+  color: var(--h-black, #111);
   margin: 0;
 }
 
@@ -111,9 +111,14 @@
 .hl-card-inner { padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 32px); }
 
 /* ── Card variants ────────────────────────────────── */
-.hl-card--originals { background: #0d2233; }
-.hl-card--basics    { background: #1a1a1a; }
-.hl-card--encargo   { background: #141414; border-color: rgba(76,201,240,0.15); }
+.hl-card--originals { background: var(--h-black, #111); }
+.hl-card--basics    { background: var(--h-grey, #F4F4F4); }
+.hl-card--encargo   { background: var(--h-navy, #0d2233); border-color: rgba(76,201,240,0.2); }
+
+/* Basics card en fondo claro — texto oscuro */
+.hl-card--basics .hl-name { color: var(--h-black, #111); }
+.hl-card--basics .hl-desc { color: rgba(0,0,0,0.55); }
+.hl-card--basics .hl-icon { background: rgba(17,17,17,0.06); color: var(--h-black, #111); }
 
 /* ── Icon ─────────────────────────────────────────── */
 .hl-icon {

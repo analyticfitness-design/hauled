@@ -3,8 +3,8 @@
     <div class="container">
       <div class="hf-header">
         <div>
-          <p class="hf-eyebrow">Colección</p>
-          <h2 class="hf-title">Lo más nuevo</h2>
+          <p class="hf-eyebrow">En stock ahora</p>
+          <h2 class="hf-title">GASP Collection</h2>
         </div>
         <nuxt-link to="/shop" class="hf-see-all">Ver todo <span class="hf-see-arrow">→</span></nuxt-link>
       </div>
@@ -52,9 +52,12 @@
 <script setup lang="ts">
 import product_data from '@/data/product-data';
 
-const featuredProducts = computed(() =>
-  product_data.filter(p => p.status === 'New' || p.featured || p.hauledLine).slice(0, 8)
-);
+const featuredProducts = computed(() => {
+  // Productos GASP primero, luego otros featured, máx 8
+  const gasp = product_data.filter(p => p.brand?.name === 'GASP');
+  const others = product_data.filter(p => p.brand?.name !== 'GASP' && (p.featured || p.status === 'New'));
+  return [...gasp, ...others].slice(0, 8);
+});
 
 const lineBadgeText = (line: string) => {
   if (line === 'originals') return 'USA';

@@ -1,27 +1,23 @@
 <template>
   <div>
-    <!-- about area start -->
+    <hauled-page-header
+      title="Nosotros"
+      eyebrow="Quiénes somos"
+      subtitle="Sobre HAULED"
+      bg="/img/hero/gasp-hero-launch.jpg"
+    />
     <about-area/>
-    <!-- about area end -->
-
-    <!-- counter area start -->
     <counter-area/>
-    <!-- counter area end -->
-
-    <!-- history area start -->
     <history-area/>
-    <!-- history area end -->
-
-    <!-- work area start -->
     <work-area/>
-    <!-- work area end -->
-
-    <!-- author area start -->
     <author-area/>
-    <!-- author area end -->
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "About Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({
+  title: 'Nosotros — HAULED',
+  description: 'Conoce la historia de HAULED, importadores directos de ropa original USA a Colombia. Autenticidad garantizada, envío nacional.',
+});
 </script>

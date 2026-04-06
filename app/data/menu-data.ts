@@ -10,45 +10,30 @@ export const menu_data: IMenuItem[] = [
   {
     id: 2,
     link: '/shop',
-    title: 'Tienda',
-    has_dropdown: true,
-    sub_menus: [
-      { link: '/shop?hauledLine=originals', title: '🇺🇸 HAULED Originals' },
-      { link: '/shop?hauledLine=basics', title: 'HAULED Basics' },
-      { link: '/shop?hauledLine=encargo', title: '📦 Encargos USA' },
-      { link: '/shop', title: 'Ver todo' },
+    title: 'GASP',
+    drop_down: true,
+    dropdown_menus: [
+      { link: '/shop?category=camisetas', title: 'Camisetas & Tanks' },
+      { link: '/shop?category=pantalonetas', title: 'Pantalonetas' },
+      { link: '/shop?category=pantalones', title: 'Pantalones' },
+      { link: '/shop?category=accesorios', title: 'Accesorios' },
+      { link: '/shop?category=zapatos', title: 'Zapatos' },
+      { link: '/shop', title: 'Ver todo GASP →' },
     ],
   },
   {
     id: 3,
-    link: '/shop?category=camisetas',
-    title: 'Camisetas',
-    has_dropdown: false,
+    link: '/encargos',
+    title: 'Encargos',
+    mega_menu: false,
   },
   {
     id: 4,
-    link: '/shop?category=hoodies',
-    title: 'Hoodies',
-    has_dropdown: false,
-  },
-  {
-    id: 5,
-    link: '/shop?category=pantalones',
-    title: 'Pantalones',
-    has_dropdown: false,
-  },
-  {
-    id: 6,
-    link: '/blog',
-    title: 'Blog',
-    has_dropdown: false,
-  },
-  {
-    id: 7,
     link: '/contact',
     title: 'Contacto',
-    has_dropdown: false,
+    mega_menu: false,
   },
 ];
 
+export const mobile_menu = menu_data;
 export default menu_data;

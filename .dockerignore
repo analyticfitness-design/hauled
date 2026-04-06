@@ -1,0 +1,44 @@
+# ═══ Nuxt build outputs (se generan en el container) ═══
+.output
+.nuxt
+.nitro
+.cache
+dist
+
+# ═══ Dependencies (se instalan en el container) ═══
+node_modules
+
+# ═══ Git ═══
+.git
+.gitignore
+.github
+
+# ═══ Env (se inyectan desde EasyPanel) ═══
+.env
+.env.*
+
+# ═══ Editor / IDE ═══
+.idea
+.vscode
+.fleet
+.claude
+.mcp.json
+.playwright-mcp
+
+# ═══ OS ═══
+.DS_Store
+Thumbs.db
+
+# ═══ Logs ═══
+*.log
+logs
+
+# ═══ Docs y guías locales ═══
+docs/
+GUIA-DEPLOY-HAULED.html
+README.md
+_workflows_pending
+
+# ═══ Vercel legacy ═══
+.vercel
+vercel.json

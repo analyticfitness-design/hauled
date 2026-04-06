@@ -1,15 +1,11 @@
 <template>
   <div>
-      <!-- breadcrumb start -->
-      <breadcrumb-4 title="Register Now" subtitle="Register" :center="true" />
-      <!-- breadcrumb end -->
-
-      <!-- register area start -->
-      <register-area/>
-      <!-- register area end -->
+    <hauled-page-header title="Crear cuenta" eyebrow="Únete a HAULED" subtitle="Registro" :center="true" />
+    <register-area/>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Register Page" });
+import { useSeo } from '@/composables/useSeo';
+useSeo({ title: 'Crear cuenta' });
 </script>

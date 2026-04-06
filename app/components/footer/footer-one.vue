@@ -43,7 +43,7 @@
               <li><nuxt-link to="/shop">Catálogo completo</nuxt-link></li>
               <li><nuxt-link to="/shop?hauledLine=originals">Originals USA</nuxt-link></li>
               <li><nuxt-link to="/shop?hauledLine=basics">Basics HAULED</nuxt-link></li>
-              <li><nuxt-link to="/shop?hauledLine=encargo">Encargos</nuxt-link></li>
+              <li><nuxt-link to="/encargos">Encargos</nuxt-link></li>
               <li><nuxt-link to="/wishlist">Lista de deseos</nuxt-link></li>
             </ul>
           </div>
@@ -70,11 +70,19 @@
               </div>
               <div class="hfoot-contact-line">
                 <span class="hfoot-contact-label">Email</span>
-                <a href="mailto:hola@hauled.shop">hola@hauled.shop</a>
+                <a href="mailto:info@hauled.shop">info@hauled.shop</a>
               </div>
               <div class="hfoot-contact-line">
                 <span class="hfoot-contact-label">Ubicación</span>
-                <span>Bogotá, Colombia</span>
+                <span>Bucaramanga, Colombia · 100% virtual</span>
+              </div>
+              <div class="hfoot-contact-line">
+                <span class="hfoot-contact-label">Horario</span>
+                <span>24/7 · Siempre abierto</span>
+              </div>
+              <div class="hfoot-contact-line">
+                <span class="hfoot-contact-label">Envíos</span>
+                <span>Gratis en Bucaramanga</span>
               </div>
               <a
                 href="https://wa.me/573000000000?text=Hola%20HAULED%2C%20tengo%20una%20pregunta%20%F0%9F%91%8B"
@@ -94,7 +102,7 @@
     <div class="hfoot-bottom">
       <div class="container">
         <div class="hfoot-bottom-inner">
-          <p class="hfoot-copy">© {{ currentYear }} HAULED · Bogotá, Colombia · Todos los derechos reservados</p>
+          <p class="hfoot-copy">© {{ currentYear }} HAULED · Bucaramanga, Colombia · Todos los derechos reservados</p>
           <div class="hfoot-payments">
             <span class="hfoot-payment-badge">Nequi</span>
             <span class="hfoot-payment-badge">Daviplata</span>
