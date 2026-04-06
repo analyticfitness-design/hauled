@@ -11,15 +11,15 @@
           <div class="col-xl-6 col-lg-8">
               <div class="tp-login-wrapper">
                 <div class="tp-login-top text-center mb-30">
-                    <h3 class="tp-login-title">Sign Up Shofy.</h3>
-                    <p>Already have an account?  <span><nuxt-link href="/login">Sign In</nuxt-link></span></p>
+                    <h3 class="tp-login-title">Crear cuenta HAULED</h3>
+                    <p>¿Ya tienes una cuenta? <span><nuxt-link href="/login">Inicia sesión</nuxt-link></span></p>
                 </div>
                 <div class="tp-login-option">
                   <!-- login social start -->
                   <login-social/>
                   <!-- login social end -->
                     <div class="tp-login-mail text-center mb-40">
-                      <p>or Sign up with <a href="#">Email</a></p>
+                      <p>o regístrate con <a href="#">correo electrónico</a></p>
                     </div>
                     <!-- form start -->
                     <forms-register-form/>
