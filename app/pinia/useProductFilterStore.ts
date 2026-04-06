@@ -27,7 +27,12 @@ export const useProductFilterStore = defineStore("product_filter", () => {
   };
 
   const filteredProducts = computed(() => {
-    let filteredProducts = [...product_data];
+    // Default: GASP products first
+    let filteredProducts = [...product_data].sort((a, b) => {
+      const aIsGasp = a.brand?.name === 'GASP' ? 0 : 1;
+      const bIsGasp = b.brand?.name === 'GASP' ? 0 : 1;
+      return aIsGasp - bIsGasp;
+    });
 
     // HAULED Line filter (originals / basics / encargo)
     if (route.query.hauledLine) {
@@ -73,7 +78,12 @@ export const useProductFilterStore = defineStore("product_filter", () => {
     // Select filter
     if (selectVal.value) {
       if (selectVal.value === "default-sorting") {
-        filteredProducts = [...product_data];
+        // GASP products first, then the rest
+        filteredProducts = [...product_data].sort((a, b) => {
+          const aIsGasp = a.brand?.name === 'GASP' ? 0 : 1;
+          const bIsGasp = b.brand?.name === 'GASP' ? 0 : 1;
+          return aIsGasp - bIsGasp;
+        });
       } else if (selectVal.value === "low-to-hight") {
         filteredProducts = filteredProducts.slice().sort((a, b) => a.price - b.price);
       } else if (selectVal.value === "high-to-low") {
