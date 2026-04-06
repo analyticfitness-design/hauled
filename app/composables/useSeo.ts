@@ -34,7 +34,7 @@ export function useSeo(options: SeoOptions = {}) {
     ogDescription: description,
     ogImage: image,
     ogUrl: url,
-    ogType: options.type ?? 'website',
+    ogType: (options.type === 'product' ? 'website' : options.type) ?? 'website',
     ogSiteName: siteName,
     twitterCard: 'summary_large_image',
     twitterTitle: title,

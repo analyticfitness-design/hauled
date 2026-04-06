@@ -9,7 +9,7 @@
     <span class="current">{{ current?.text || placeholder }}</span>
     <ul class="list" role="menubar" @click.prevent="$event.stopPropagation()">
       <li
-        :class="[`option`, { 'selected focus': item.value === current.value }]"
+        :class="[`option`, { 'selected focus': item.value === current?.value }]"
         v-for="(item, index) in options"
         :key="`option-${index}`"
         @click.prevent="currentHandler(item, index)"

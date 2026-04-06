@@ -35,7 +35,7 @@
         </li>
 
         <li
-          v-else-if="menu.sub_menu"
+          v-else-if="menu.drop_down"
           :key="menu.id"
           :class="`has-dropdown ${isActiveMenu === menu.title?'dropdown-opened':''}`"
         >
@@ -49,7 +49,7 @@
             </button>
           </a>
           <ul :class="`tp-submenu ${isActiveMenu === menu.title ? 'active':''}`">
-            <li v-for="(subMenu, i) in menu.sub_menus" :key="i">
+            <li v-for="(subMenu, i) in menu.dropdown_menus" :key="i">
               <nuxt-link :to="subMenu.link">{{ subMenu.title }}</nuxt-link>
             </li>
           </ul>

@@ -65,8 +65,8 @@
                     :key="item.id"
                     class="tp-order-info-list-desc"
                   >
-                    <p>{{ item.title }} <span> x {{ item.orderQuantity }}</span></p>
-                    <span>{{ formatCOP(item.price * item.orderQuantity) }}</span>
+                    <p>{{ item.title }} <span> x {{ item.orderQuantity ?? 1 }}</span></p>
+                    <span>{{ formatCOP(item.price * (item.orderQuantity ?? 1)) }}</span>
                   </li>
 
                   <!-- Mensaje si carrito vacío -->
@@ -124,7 +124,7 @@ function formatCOP(value: number): string {
 
 const shippingCost = 15000;
 const subtotal = computed(() =>
-  cartItems.value.reduce((sum, item) => sum + item.price * item.orderQuantity, 0)
+  cartItems.value.reduce((sum, item) => sum + item.price * (item.orderQuantity ?? 1), 0)
 );
 const total = computed(() => subtotal.value + shippingCost);
 

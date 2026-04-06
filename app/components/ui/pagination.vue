@@ -46,7 +46,7 @@ const setPage = (idx: number) => {
   if (idx <= 0 || idx > totalPages.value) {
     return;
   }
-  window.scrollTo(0, 0);
+  if (import.meta.client) window.scrollTo(0, 0);
   currentPage.value = idx;
   emit("handlePaginate", props.data, startIndex.value, endIndex.value);
 };
