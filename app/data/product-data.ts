@@ -5,8 +5,12 @@ import { type IProduct } from "@/types/product-type";
 // hauledLine: "basics"    = Private label / AliExpress con tag HAULED
 // hauledLine: "encargo"   = Pedido bajo demanda, cero inventario
 
+// Productos no-GASP están desactivados temporalmente.
+// Para reactivarlos, moverlos de vuelta dentro del array product_data.
+
 export const product_data: IProduct[] = [
-  // ── HAULED ORIGINALS ──────────────────────────────
+  // ── HAULED ORIGINALS ── (desactivado temporalmente) ──────────────────────
+  /* INICIO_HAULED_NO_GASP
   {
     id: "hauled-001",
     sku: "HO-NK-TEE-001",
@@ -349,6 +353,7 @@ export const product_data: IProduct[] = [
     tags: ["encargo", "custom", "personalizado", "usa"],
     reviews: [],
   },
+  FIN_HAULED_NO_GASP */
 
   // ── GASP ORIGINALS ────────────────────────────────────────────────────────
   {
