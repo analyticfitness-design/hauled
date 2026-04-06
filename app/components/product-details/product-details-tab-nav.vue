@@ -2,11 +2,11 @@
   <div class="tp-product-details-tab-nav tp-tab">
     <nav>
       <div class="nav nav-tabs justify-content-center p-relative tp-product-tab" id="navPresentationTab" role="tablist">
-        <button @click="handleActiveMarker($event)" class="nav-link" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
+        <button @click="handleActiveMarker($event)" class="nav-link" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>
 
-        <button @click="handleActiveMarker($event)" class="nav-link active" id="nav-addInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-addInfo" type="button" role="tab" aria-controls="nav-addInfo" aria-selected="false">Additional information</button>
+        <button @click="handleActiveMarker($event)" class="nav-link active" id="nav-addInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-addInfo" type="button" role="tab" aria-controls="nav-addInfo" aria-selected="false">Información adicional</button>
 
-        <button @click="handleActiveMarker($event)" class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews ({{product.reviews?.length}})</button>
+        <button @click="handleActiveMarker($event)" class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reseñas ({{product.reviews?.length}})</button>
         <span id="productTabMarker" class="tp-product-details-tab-line"></span>
       </div>
     </nav>  
@@ -53,7 +53,7 @@
                   <div class="tp-product-details-review-statics">
                       <!-- number -->
                       <div class="tp-product-details-review-number d-inline-block mb-50">
-                        <h3 class="tp-product-details-review-number-title">Customer reviews</h3>
+                        <h3 class="tp-product-details-review-number-title">Reseñas de clientes</h3>
                         <div class="tp-product-details-review-summery d-flex align-items-center">
                             <div class="tp-product-details-review-summery-value">
                               <span>4.5</span>
@@ -64,7 +64,7 @@
                               <span><i class="fa-solid fa-star"></i></span>
                               <span><i class="fa-solid fa-star"></i></span>
                               <span><i class="fa-solid fa-star"></i></span>
-                              <p>({{product.reviews?.length}} Reviews)</p>
+                              <p>({{product.reviews?.length}} reseñas)</p>
                             </div>
                         </div>
                         <div class="tp-product-details-review-rating-list">
@@ -80,7 +80,7 @@
 
                       <!-- reviews -->
                       <div class="tp-product-details-review-list pr-110">
-                        <h3 class="tp-product-details-review-title">Rating & Review</h3>
+                        <h3 class="tp-product-details-review-title">Calificaciones y reseñas</h3>
                         <div v-if="product.reviews && product.reviews.length > 0">
                           <div v-for="(item,i) in product.reviews" :key="i" class="tp-product-details-review-avater d-flex align-items-start">
                               <div class="tp-product-details-review-avater-thumb">
@@ -106,15 +106,15 @@
                           </div>
                         </div>
                         <div v-else>
-                          <h5>No Reviews Found</h5>
+                          <h5>Aún no hay reseñas para este producto</h5>
                         </div>
                       </div>
                   </div>
                 </div> <!-- end col -->
                 <div class="col-lg-6">
                   <div class="tp-product-details-review-form">
-                      <h3 class="tp-product-details-review-form-title">Review this product</h3>
-                      <p>Your email address will not be published. Required fields are marked *</p>
+                      <h3 class="tp-product-details-review-form-title">Deja tu reseña</h3>
+                      <p>Tu correo no será publicado. Los campos obligatorios están marcados con *</p>
                      <!-- form start -->
                      <forms-review-form/>
                      <!-- form end -->
