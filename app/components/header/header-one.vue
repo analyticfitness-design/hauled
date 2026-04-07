@@ -294,7 +294,7 @@ const searchCloseRef = useClickOutside(closeSearch);
 }
 @media (max-width: 991px) {
   .h-main-inner { grid-template-columns: 1fr auto; }
-  .h-nav-desktop { display: none; }
+  .h-nav-desktop { display: none !important; }
 }
 
 /* ════════════════════════════════════════════════════
