@@ -55,7 +55,7 @@ export default defineNuxtConfig({
       wompiPublicKey: process.env.WOMPI_PUBLIC_KEY ?? 'pub_test_XXXXXXXX',
       appUrl: process.env.APP_URL ?? 'https://hauled.shop',
       whatsappNumber: process.env.WHATSAPP_NUMBER ?? '573000000000',
-      apiBase: process.env.API_BASE_URL ?? 'http://localhost:8000',
+      apiBase: process.env.API_BASE_URL ?? 'http://hauled-api.test',
     },
   },
 
