@@ -55,4 +55,6 @@ export interface IProduct {
   deliveryDays?: string;
   advancePercent?: number;
   priceUsd?: number; // precio retail USD original
+  priceUsdSale?: number; // precio de venta USD ya con -15% (ej: 84.15)
+  priceCopSale?: number; // precio de venta COP en pesos enteros (ej: 307148)
 }
