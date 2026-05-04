@@ -584,18 +584,19 @@ const searchCloseRef = useClickOutside(closeSearch);
   gap: 8px;
 }
 .h-search-toggle {
-  @extend .h-icon-btn;
-  background: transparent;
-  border: none;
-  cursor: pointer;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 42px;
   height: 42px;
-  color: rgba(255,255,255,0.7);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
   border-radius: 8px;
-  transition: color 180ms, background 180ms;
+  text-decoration: none;
+  transition: background 180ms, color 180ms;
 }
 .h-search-toggle:hover { color: var(--h-blue, #4CC9F0); background: rgba(76,201,240,0.08); }
 .h-search-box {

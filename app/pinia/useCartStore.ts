@@ -56,10 +56,11 @@ export const useCartStore = defineStore("cart_product", () => {
   };
 
   const clear_cart = () => {
-    if (window.confirm("¿Vaciar el carrito?")) {
-      cart_products.value = [];
+    cart_products.value = [];
+    if (typeof localStorage !== 'undefined') {
       localStorage.setItem("cart_products", JSON.stringify([]));
     }
+    toast.info('Carrito vaciado');
   };
 
   const initialOrderQuantity = () => { orderQuantity.value = 1; };
