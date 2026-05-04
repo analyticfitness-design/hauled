@@ -1,33 +1,41 @@
 import { defineStore } from "pinia";
 import product_data from "@/data/product-data";
 import {formatString} from '@/utils/index';
+import type { IProduct } from "@/types/product-type";
 
 export const useProductFilterStore = defineStore("product_filter", () => {
   const route = useRoute();
   const router = useRouter();
   let selectVal = ref<string>("");
 
+  // Lista reactiva de productos — inicializa con mock, se reemplaza con datos de API
+  const products = ref<IProduct[]>(product_data);
+
+  const setProducts = (items: IProduct[]) => {
+    products.value = items;
+  };
+
   const handleSelectFilter = (e: { value: string; text: string }) => {
     selectVal.value = e.value;
   }
 
-  const maxProductPrice = product_data.reduce((max, product) => {
-    return product.price > max ? product.price : max;
-  }, 0);
+  const maxProductPrice = computed(() =>
+    products.value.reduce((max, p) => (p.price > max ? p.price : max), 0)
+  );
 
-  let priceValues = ref([0, maxProductPrice]);
+  let priceValues = ref([0, maxProductPrice.value]);
 
   const handlePriceChange = (value: number[]) => {
     priceValues.value = value;
   };
 
   const handleResetFilter = () => {
-    priceValues.value = [0, maxProductPrice];
+    priceValues.value = [0, maxProductPrice.value];
   };
 
   const filteredProducts = computed(() => {
     // Default: GASP products first
-    let filteredProducts = [...product_data].sort((a, b) => {
+    let filteredProducts = [...products.value].sort((a, b) => {
       const aIsGasp = a.brand?.name === 'GASP' ? 0 : 1;
       const bIsGasp = b.brand?.name === 'GASP' ? 0 : 1;
       return aIsGasp - bIsGasp;
@@ -47,7 +55,7 @@ export const useProductFilterStore = defineStore("product_filter", () => {
           p.price >= Number(route.query.minPrice) &&
           p.price <= Number(route.query.maxPrice)
       );
-    } 
+    }
     // Status filter
     if (route.query.status) {
       if (route.query.status === "on-sale") {
@@ -55,30 +63,30 @@ export const useProductFilterStore = defineStore("product_filter", () => {
       } else if (route.query.status === "in-stock") {
         filteredProducts = filteredProducts.filter((p) => p.status === "in-stock");
       }
-    } 
+    }
     // Category filter
     if (route.query.category) {
       filteredProducts = filteredProducts.filter(
         (p) => formatString(p.parent) === route.query.category
       );
-    } 
+    }
     // Sub-category filter
     if (route.query.subCategory) {
       filteredProducts = filteredProducts.filter(
         (p) => formatString(p.children) === route.query.subCategory
       );
-    } 
+    }
     // Brand filter
     if (route.query.brand) {
       filteredProducts = filteredProducts.filter(
         (p) => formatString(p.brand.name) === route.query.brand
       );
-    } 
+    }
     // Select filter
     if (selectVal.value) {
       if (selectVal.value === "default-sorting") {
         // GASP products first, then the rest
-        filteredProducts = [...product_data].sort((a, b) => {
+        filteredProducts = [...products.value].sort((a, b) => {
           const aIsGasp = a.brand?.name === 'GASP' ? 0 : 1;
           const bIsGasp = b.brand?.name === 'GASP' ? 0 : 1;
           return aIsGasp - bIsGasp;
@@ -93,7 +101,7 @@ export const useProductFilterStore = defineStore("product_filter", () => {
         filteredProducts = filteredProducts.filter((p) => p.discount > 0);
       }
     }
-  
+
     return filteredProducts;
   });
 
@@ -101,24 +109,24 @@ export const useProductFilterStore = defineStore("product_filter", () => {
 
   // filteredProducts
   const searchFilteredItems = computed(() => {
-    let filteredProducts = [...product_data];
+    let filteredProducts = [...products.value];
     const { searchText, productType }:{searchText?:string, productType?:string} = route.query;
-  
-    if (searchText && !productType) { 
+
+    if (searchText && !productType) {
       filteredProducts = filteredProducts.filter((prd) =>
         prd.title.toLowerCase().includes(searchText.toLowerCase())
       );
-    } 
-    if (!searchText && productType) { 
+    }
+    if (!searchText && productType) {
       filteredProducts = filteredProducts.filter(
         (prd) => prd.productType.toLowerCase() === productType.toLowerCase()
       );
-    } 
-    if (searchText && productType) { 
+    }
+    if (searchText && productType) {
       filteredProducts = filteredProducts.filter(
         (prd) => prd.productType.toLowerCase() === productType.toLowerCase()
       ).filter(p => p.title.toLowerCase().includes(searchText.toLowerCase()));
-    } 
+    }
     switch (selectVal.value) {
       case "default-sorting":
         break;
@@ -138,13 +146,15 @@ export const useProductFilterStore = defineStore("product_filter", () => {
     }
     return filteredProducts;
   });
-  
+
 
   watch(
     () => route.query || route.path,
     () => {}
   );
   return {
+    products,
+    setProducts,
     maxProductPrice,
     priceValues,
     handleSelectFilter,

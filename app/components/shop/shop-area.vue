@@ -53,7 +53,17 @@
               </div>
             </div>
             <div class="tp-shop-items-wrapper tp-shop-item-primary">
-              <div v-if="active_tab === 'grid'">
+              <div v-if="loading" class="row">
+                <div
+                  v-for="n in 6"
+                  :key="`sk-${n}`"
+                  class="col-xl-4 col-md-6 col-sm-6 mb-30"
+                >
+                  <div class="hauled-product-skeleton" />
+                </div>
+              </div>
+
+              <div v-else-if="active_tab === 'grid'">
                 <div class="row infinite-container">
                   <div
                     v-for="item in store.filteredProducts?.slice(startIndex,endIndex)"
@@ -68,7 +78,7 @@
                 </div>
               </div>
 
-              <div v-if="active_tab === 'list'">
+              <div v-else-if="active_tab === 'list'">
                 <div class="row">
                   <div class="col-xl-12">
                     <product-list-item
@@ -113,8 +123,8 @@
 </template>
 
 <script setup lang="ts">
-import product_data from "@/data/product-data";
 import { useProductFilterStore } from "@/pinia/useProductFilterStore";
+import { useProducts } from "@/composables/useProducts";
 import { type IProduct } from "@/types/product-type";
 const route = useRoute();
 const props = defineProps<{
@@ -127,6 +137,15 @@ const props = defineProps<{
 
 const active_tab = ref<string>(props.list_style ? "list" : "grid");
 const store = useProductFilterStore();
+
+const { products: apiProducts, loading, error, usedFallback, fetchProducts } = useProducts();
+
+onMounted(async () => {
+  await fetchProducts();
+  if (apiProducts.value.length > 0) {
+    store.setProducts(apiProducts.value);
+  }
+});
 
 let filteredProductsItems = ref<IProduct[]>(store.filteredProducts!);
 let startIndex = ref<number>(0);
@@ -224,5 +243,18 @@ watch(
 .tp-shop-widget input,
 .tp-shop-widget select {
   font-size: 16px;
+}
+
+/* Loading skeleton */
+.hauled-product-skeleton {
+  height: 360px;
+  background: linear-gradient(90deg, #f4f4f4 0%, #ebebeb 50%, #f4f4f4 100%);
+  background-size: 200% 100%;
+  animation: hauled-skeleton 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+@keyframes hauled-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 </style>
