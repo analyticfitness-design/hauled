@@ -107,12 +107,14 @@
     <!-- Botón -->
     <div class="tp-checkout-btn-wrapper">
       <button
-        type="submit"
+        type="button"
         class="tp-checkout-btn w-100"
-        :disabled="!termsAccepted"
+        :disabled="!termsAccepted || processing"
+        @click="handleCheckout"
         style="font-family:'Raleway',sans-serif;font-weight:900;letter-spacing:2px"
       >
-        Confirmar pedido
+        <span v-if="processing">Procesando...</span>
+        <span v-else>Confirmar pedido</span>
       </button>
     </div>
   </div>
@@ -120,11 +122,19 @@
 
 <script setup lang="ts">
 import { useCartStore } from '@/pinia/useCartStore';
+import { toast } from 'vue3-toastify';
+
+const props = defineProps<{
+  billingRef?: { form: any } | null;
+}>();
+
 const cartStore = useCartStore();
+const config = useRuntimeConfig();
 
 let shipCost = ref<number>(0);
 let payment_name = ref<string>('wompi');
 let termsAccepted = ref<boolean>(false);
+let processing = ref<boolean>(false);
 
 const stockItems = computed(() =>
   cartStore.cart_products.filter(p => p.hauledLine !== 'encargo')
@@ -135,6 +145,87 @@ const encargoItems = computed(() =>
 
 const handleShippingCost = (value: number) => { shipCost.value = value; };
 const handlePayment = (value: string) => { payment_name.value = value; };
+
+const handleCheckout = async () => {
+  if (!termsAccepted.value || processing.value) return;
+
+  const billing = props.billingRef?.form;
+  if (!billing) {
+    toast.error('No se pudieron leer los datos de envío');
+    return;
+  }
+
+  // Validación mínima
+  const required: Array<[string, string]> = [
+    ['nombre', billing.nombre],
+    ['apellido', billing.apellido],
+    ['ciudad', billing.ciudad],
+    ['direccion', billing.direccion],
+    ['telefono', billing.telefono],
+    ['email', billing.email],
+  ];
+  const missing = required.filter(([_, v]) => !v || String(v).trim() === '');
+  if (missing.length > 0) {
+    toast.error('Completa todos los datos de envío marcados con *');
+    return;
+  }
+
+  if (stockItems.value.length === 0 && encargoItems.value.length === 0) {
+    toast.error('El carrito está vacío');
+    return;
+  }
+
+  if (stockItems.value.length === 0) {
+    // Solo encargos: no hay pago Wompi, va por WhatsApp
+    toast.info('Tus encargos serán coordinados por WhatsApp en las próximas 24h.');
+    return;
+  }
+
+  processing.value = true;
+
+  try {
+    const apiBase = (config.public.apiBase as string) ?? 'http://localhost:8000';
+    const token = useCookie('auth_token').value;
+
+    const orderPayload = {
+      items: stockItems.value.map(item => ({
+        product_slug: item.slug,
+        quantity: item.orderQuantity ?? 1,
+        size: item.sizes?.[0] ?? null,
+      })),
+      address: {
+        name: `${billing.nombre} ${billing.apellido}`.trim(),
+        phone: billing.telefono,
+        city: billing.ciudad,
+        address: [billing.direccion, billing.direccion2].filter(Boolean).join(' — '),
+      },
+    };
+
+    const res = await $fetch<{ wompi_redirect: string; order: { reference: string } }>(
+      `${apiBase}/api/v1/orders`,
+      {
+        method: 'POST',
+        body: orderPayload,
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }
+    );
+
+    if (res?.wompi_redirect) {
+      cartStore.cart_products = [];
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('cart_products', '[]');
+      }
+      window.location.href = res.wompi_redirect;
+    } else {
+      toast.error('No se pudo iniciar el pago. Intenta de nuevo.');
+    }
+  } catch (e: any) {
+    const msg = e?.data?.message ?? 'Error al procesar el pedido';
+    toast.error(msg);
+  } finally {
+    processing.value = false;
+  }
+};
 </script>
 
 <style scoped>

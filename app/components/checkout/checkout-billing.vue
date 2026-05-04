@@ -87,4 +87,6 @@ const ciudades = [
   { value: 'cucuta', text: 'Cúcuta' },
   { value: 'otra', text: 'Otra ciudad' },
 ];
+
+defineExpose({ form });
 </script>

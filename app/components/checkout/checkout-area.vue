@@ -19,12 +19,12 @@
             <div class="col-lg-7">
               <div class="tp-checkout-bill-area">
                 <h3 class="tp-checkout-bill-title">Datos de facturación</h3>
-                <checkout-billing />
+                <checkout-billing ref="billingRef" />
               </div>
             </div>
             <div class="col-lg-5">
               <!-- checkout place order -->
-              <checkout-order />
+              <checkout-order :billing-ref="billingRef" />
               <!-- checkout place order -->
             </div>
           </div>
@@ -39,4 +39,5 @@
 import {useCartStore} from '@/pinia/useCartStore';
 
 const cartStore = useCartStore()
+const billingRef = ref<{ form: any } | null>(null);
 </script>
