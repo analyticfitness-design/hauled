@@ -84,6 +84,11 @@
         <span v-if="item.hauledLine === 'encargo'" class="tp-product-price-2 new-price hauled-price-encargo">
           Cotizar →
         </span>
+        <ProductPrice
+          v-else-if="item.priceUsdSale != null && item.priceCopSale != null"
+          :price-usd="item.priceUsdSale"
+          :price-cop="item.priceCopSale"
+        />
         <div v-else-if="item.discount > 0">
           <span class="tp-product-price-2 new-price">
             {{ formatPrice(Number(item.price) - (Number(item.price) * Number(item.discount)) / 100) }}
@@ -105,6 +110,7 @@ import { useCartStore } from "@/pinia/useCartStore";
 import { useUtilityStore } from "@/pinia/useUtilityStore";
 import { useWishlistStore } from "@/pinia/useWishlistStore";
 import HauledLineBadge from "@/components/hauled/HauledLineBadge.vue";
+import ProductPrice from "@/components/product/ProductPrice.vue";
 
 const compareStore = useCompareStore();
 const cartStore = useCartStore();

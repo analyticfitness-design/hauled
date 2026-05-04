@@ -60,7 +60,12 @@
         </div>
 
         <div class="tp-product-price-wrapper-2">
-          <div v-if="item.discount > 0">
+          <ProductPrice
+            v-if="item.priceUsdSale != null && item.priceCopSale != null"
+            :price-usd="item.priceUsdSale"
+            :price-cop="item.priceCopSale"
+          />
+          <div v-else-if="item.discount > 0">
             <span class="tp-product-price-2 new-price">
               {{formatPrice((Number(item.price) - (Number(item.price) * Number(item.discount)) / 100))}} {{ " " }}
             </span>
@@ -89,6 +94,7 @@ import { useUtilityStore } from "@/pinia/useUtilityStore";
 import { useCompareStore } from "@/pinia/useCompareStore";
 import { useCartStore } from "@/pinia/useCartStore";
 import { useWishlistStore } from "@/pinia/useWishlistStore";
+import ProductPrice from "@/components/product/ProductPrice.vue";
 
 defineProps<{ item: IProduct }>();
 
