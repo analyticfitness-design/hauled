@@ -19,7 +19,7 @@
             Recibirás una confirmación en tu correo. También puedes escribirnos por WhatsApp para hacer seguimiento.
           </p>
           <div class="hauled-confirm-actions">
-            <a href="https://wa.me/573000000000" target="_blank" class="hauled-wa-btn">💬 WhatsApp</a>
+            <a :href="waLink" target="_blank" class="hauled-wa-btn">💬 WhatsApp</a>
             <nuxt-link to="/shop" class="hauled-shop-btn">Seguir comprando</nuxt-link>
           </div>
         </div>
@@ -31,7 +31,7 @@
           <p class="hauled-confirm-sub">Tu pago está siendo verificado. Esto puede tomar unos minutos.</p>
           <div class="hauled-confirm-ref">Referencia: <strong>{{ referencia }}</strong></div>
           <div class="hauled-confirm-actions">
-            <a href="https://wa.me/573000000000" target="_blank" class="hauled-wa-btn">💬 Confirmar por WhatsApp</a>
+            <a :href="waLink" target="_blank" class="hauled-wa-btn">💬 Confirmar por WhatsApp</a>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
           <p class="hauled-confirm-sub">El pago fue rechazado o cancelado. No se realizó ningún cobro.</p>
           <div class="hauled-confirm-actions">
             <nuxt-link to="/checkout" class="hauled-shop-btn">Intentar de nuevo</nuxt-link>
-            <a href="https://wa.me/573000000000" target="_blank" class="hauled-wa-btn">💬 Ayuda por WhatsApp</a>
+            <a :href="waLink" target="_blank" class="hauled-wa-btn">💬 Ayuda por WhatsApp</a>
           </div>
         </div>
 
@@ -57,20 +57,36 @@ import { useWompi } from '@/composables/useWompi';
 useSeoMeta({ title: 'Confirmación de pago — HAULED' });
 
 const route = useRoute();
+const config = useRuntimeConfig();
 const { consultarTransaccion } = useWompi();
 
 const referencia = ref(route.query.ref as string ?? '');
 const estado = ref<string>('cargando');
+const waNumber = config.public.whatsappNumber as string;
+const waLink = computed(() => `https://wa.me/${waNumber}`);
 
 onMounted(async () => {
   if (!referencia.value) {
     estado.value = 'ERROR';
     return;
   }
-  // Esperar 2s para que Wompi procese el webhook
-  await new Promise(r => setTimeout(r, 2000));
-  const tx = await consultarTransaccion(referencia.value);
-  estado.value = tx?.status ?? 'ERROR';
+
+  // Polling: hasta 10 intentos cada 3s (max ~30s) hasta que Wompi confirme APPROVED/DECLINED.
+  const maxIntentos = 10;
+  const intervalo = 3000;
+
+  for (let i = 0; i < maxIntentos; i++) {
+    await new Promise(r => setTimeout(r, intervalo));
+    const tx = await consultarTransaccion(referencia.value);
+    const s = tx?.status;
+    if (s && s !== 'PENDING') {
+      estado.value = s;
+      return;
+    }
+  }
+
+  // Timeout: muestra como pendiente, NO como error — el webhook puede tardar más.
+  estado.value = 'PENDING';
 });
 </script>
 
