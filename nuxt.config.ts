@@ -24,6 +24,13 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       link: [
+        // Favicon HAULED — caja isométrica abierta + cyan accent
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'mask-icon', href: '/favicon.svg', color: '#4CC9F0' },
         {
           rel: 'preconnect',
           href: 'https://fonts.googleapis.com',
@@ -37,6 +44,9 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap',
         },
+      ],
+      meta: [
+        { name: 'theme-color', content: '#0a1929' },
       ],
       script: [
         {

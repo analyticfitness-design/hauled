@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="boxBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1929"/>
+      <stop offset="1" stop-color="#04101e"/>
+    </linearGradient>
+    <linearGradient id="boxRight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13263e"/>
+      <stop offset="1" stop-color="#08172a"/>
+    </linearGradient>
+    <linearGradient id="flapL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7be2ff"/>
+      <stop offset="1" stop-color="#4CC9F0"/>
+    </linearGradient>
+    <linearGradient id="flapR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5dd5fb"/>
+      <stop offset="1" stop-color="#20C1E9"/>
+    </linearGradient>
+  </defs>
+  <!-- Box left/front face -->
+  <path d="M6 24 L32 36 L32 60 L6 48 Z" fill="url(#boxBody)"/>
+  <!-- Box right face -->
+  <path d="M32 36 L58 24 L58 48 L32 60 Z" fill="url(#boxRight)"/>
+  <!-- Box top (where flaps emerge) -->
+  <path d="M6 24 L32 12 L58 24 L32 36 Z" fill="#162b48"/>
+  <!-- Left flap (cyan, opening outward) -->
+  <path d="M6 24 L18 6 L32 12 L32 22 Z" fill="url(#flapL)"/>
+  <!-- Right flap (cyan, opening outward) -->
+  <path d="M58 24 L46 6 L32 12 L32 22 Z" fill="url(#flapR)"/>
+  <!-- Inner shadow into box -->
+  <path d="M16 22 L32 30 L48 22 L48 24 L32 32 L16 24 Z" fill="#04101e" opacity="0.55"/>
+</svg>
