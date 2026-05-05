@@ -12,6 +12,9 @@
 #   - Runtime usa alpine (más ligero, ~80MB vs 200MB).
 # ─────────────────────────────────────────────────────────────────────
 
+# Cache buster: 2026-05-05 — fuerza rebuild fresco (descartar cache GHA estancada)
+ARG CACHE_BUST=2026-05-05-v2
+
 # ===== Stage 1: build (Nuxt) =====
 FROM node:20-slim AS builder
 
@@ -31,7 +34,8 @@ COPY . .
 # NUXT_TELEMETRY_DISABLED=1 evita pings a nuxt.com durante el build.
 ENV NUXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=--max-old-space-size=4096
-RUN npm run build
+ARG CACHE_BUST
+RUN echo "cache-bust=$CACHE_BUST" && npm run build
 
 # ===== Stage 2: runtime (alpine ligero) =====
 FROM node:20-alpine AS runtime
