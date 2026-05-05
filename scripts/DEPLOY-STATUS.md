@@ -58,27 +58,76 @@ matando al host AWS.
 Ya tenías memoria previa: *"EasyPanel tumba el servidor al levantar la API"*.
 Mismo patrón.
 
-## Recovery — qué hacer cuando vuelvas
+## ESTADO ACTUAL (2026-05-05 ~02:18)
 
-### Si el server vuelve solo
-1. Espera al Monitor que esté corriendo (`task bfbbrl0jj`).
-2. El nuevo container debería arrancar con port 3000.
-3. Verifica con: `node scripts/verify-live.cjs`
-4. Si dice `✅ DEPLOY FRESH`, listo.
+- ✅ Host AWS arriba (panel responde 200)
+- ✅ Imagen `:latest` en GHCR con commit f85d44f
+- ✅ Dominios apuntan a port 3000 (matching nuevo Dockerfile)
+- ❌ **Container hauled NO arranca** — Docker swarm "task has not been scheduled"
+- ❌ hauled.shop devuelve 502/503
+
+### Lo que probé (todo sin éxito)
+- `node scripts/easypanel-deploy.cjs` — click Implementar
+- `node scripts/easypanel-deploy.cjs --rebuild` — click hammer (force pull)
+- `node scripts/easypanel-restart-cycle.cjs` — Stop → Start ciclo
+- `node scripts/easypanel-set-image.cjs sha-XXX` — image tag distinto
+- Click Play (▶) directo → 0% CPU, 0 B memoria (no arranca)
+- Cambio de port 80 → 3000 en proxy de dominios
+
+Después de 60s con Play clickeado, container sigue en 0%/0B/Red.
+
+### Diagnóstico
+Docker Swarm scheduler está bloqueado para hauled. Los otros 4 servicios
+(prowaylab, wellcorefitness, mysql, redis) corren OK, así que el swarm
+en sí funciona — solo se niega a programar la task de hauled.
+
+Host tiene RAM disponible (1.1 GB / 1.9 GB usado, ~800 MB libre — Nuxt
+container debería caber), así que NO es OOM directo.
+
+Posibles causas (requiere SSH al host):
+1. Stale swarm state después del crash/reboot — necesita cleanup manual
+2. Constraint de recursos en el servicio (memory limit) > free reservado
+3. Image pull failing silently (auth/cache GHCR)
+
+## Recovery — qué hacer
+
+### Vía SSH al host AWS
+```bash
+ssh ubuntu@13.59.70.113   # o el user correspondiente
+
+# Ver el estado del swarm
+docker service ls | grep hauled
+docker service ps wellcorefitness_hauled --no-trunc
+
+# Esto te dirá EXACTAMENTE por qué la task no se programa
+# Si "no suitable node" → constraint o resources
+# Si "rejected" → problema de pull o port
+
+# Forzar nuevo pull manual (bypass cache de Docker)
+docker pull ghcr.io/analyticfitness-design/hauled:latest
+
+# Reiniciar el servicio en swarm
+docker service update --force wellcorefitness_hauled
+
+# Ver logs del último intento
+docker service logs wellcorefitness_hauled --tail 50
+
+# Si nada funciona, eliminar y dejar que EasyPanel recree
+docker service rm wellcorefitness_hauled
+# Luego en EasyPanel UI → click Implementar
+```
+
+### Si el problema es resource limits
+En EasyPanel UI → hauled → Recursos → ajustar memory limit a algo bajo
+(256MB o así) y guardar.
 
 ### Si necesitas reiniciar AWS manualmente
-1. Entra a AWS Console → EC2 → instancia `13.59.70.113`
-2. Si está running pero unresponsive → Reboot
-3. Si está stopped → Start
-4. Espera 2-3 min para que EasyPanel y Docker arranquen
-5. Logueate al panel: https://panel.wellcorefitness.com/
-6. Servicio `hauled` debería arrancar solo. Si no:
-   ```
-   node scripts/easypanel-deploy.cjs
-   node scripts/verify-live.cjs
-   ```
+1. AWS Console → EC2 → `13.59.70.113`
+2. Reboot (o Stop + Start)
+3. Espera 2-3 min para Docker daemon
+4. Login a panel → click Implementar en hauled
 
-### Si el nuevo container no arranca (port mismatch persistente)
+### Si nada funciona — rollback de port
 
 Dos opciones:
 
