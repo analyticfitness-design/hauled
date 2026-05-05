@@ -28,13 +28,17 @@ const EXCLUDED_TITLES = [
   'Original Cut Out',
 ];
 
-// Precios viejos (TRM 4200 sin descuento)
-const OLD_PRICE_TOKENS = ['$226,800', '$268,800', '$373,800', '$415,800', '$499,800', '$541,800', '$310,800'];
+// Helper: normaliza un precio quitando comas y puntos (separadores de miles)
+//   "$400,223" → "400223"  |  "$400.223" → "400223"  |  "$400223" → "400223"
+const normalizePrice = (s) => String(s).replace(/[$.,\s]/g, '');
 
-// Precios nuevos (TRM 3650, 15% off)
-const NEW_PRICE_TOKENS = [
-  '$198,560', '$307,148', '$369,198', '$167,535', '$136,510',
-  '$120,998', '$245,098', '$152,023', '$105,485', '$400,223'
+// Precios viejos (TRM 4200 sin descuento) — normalized
+const OLD_PRICES = ['226800', '268800', '373800', '415800', '499800', '541800', '310800'];
+
+// Precios nuevos (TRM 3650, 15% off) — normalized
+const NEW_PRICES = [
+  '198560', '307148', '369198', '167535', '136510',
+  '120998', '245098', '152023', '105485', '400223'
 ];
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -80,9 +84,11 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   data.prices.forEach(p => console.log('    •', p));
 
   console.log('\n─── AUDIT ───');
+  // Normalizar precios encontrados para comparar sin importar el separador (. o ,)
+  const normalizedFound = data.prices.map(normalizePrice);
   const stale = EXCLUDED_TITLES.filter(ex => data.titles.some(t => t.includes(ex)));
-  const oldP  = OLD_PRICE_TOKENS.filter(p => data.prices.some(d => d.includes(p)));
-  const newP  = NEW_PRICE_TOKENS.filter(p => data.prices.some(d => d.includes(p)));
+  const oldP  = OLD_PRICES.filter(p => normalizedFound.some(d => d.includes(p)));
+  const newP  = NEW_PRICES.filter(p => normalizedFound.some(d => d.includes(p)));
 
   if (stale.length) {
     console.log('  ⚠ Productos eliminados que aún aparecen:');
@@ -98,7 +104,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     console.log('  ✓ Sin precios viejos');
   }
 
-  console.log(`  ${newP.length > 0 ? '✓' : '⚠'} Precios nuevos (TRM 3650 -15%): ${newP.length}/${NEW_PRICE_TOKENS.length}`);
+  console.log(`  ${newP.length > 0 ? '✓' : '⚠'} Precios nuevos (TRM 3650 -15%): ${newP.length}/${NEW_PRICES.length}`);
 
   const isFresh = stale.length === 0 && oldP.length === 0 && newP.length > 0;
   console.log('\n  Estado:', isFresh ? '✅ DEPLOY FRESH' : '❌ DEPLOY STALE — re-trigger needed');
