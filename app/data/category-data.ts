@@ -7,7 +7,7 @@ const category_data: ICategory[] = [
     parent: "Camisetas",
     children: ["Tee", "Tank Top"],
     productType: "fashion",
-    products: ["gasp-007", "gasp-010", "gasp-011", "gasp-012", "gasp-014", "gasp-015", "gasp-017"],
+    products: ["gasp-007", "gasp-010", "gasp-012", "gasp-015", "gasp-017"],
     status: "Show",
   },
   {
@@ -25,7 +25,7 @@ const category_data: ICategory[] = [
     parent: "Pantalones",
     children: ["Baggy", "Track", "Sudadera", "Mesh"],
     productType: "fashion",
-    products: ["gasp-004", "gasp-005", "gasp-006", "gasp-008", "gasp-009", "gasp-013"],
+    products: ["gasp-004", "gasp-008", "gasp-013"],
     status: "Show",
   },
   {
@@ -34,7 +34,7 @@ const category_data: ICategory[] = [
     parent: "Accesorios",
     children: ["Mochilas", "Bolsos", "Soporte"],
     productType: "fashion",
-    products: ["gasp-001", "gasp-002", "gasp-016", "gasp-020"],
+    products: ["gasp-001", "gasp-tactical-backpack-camo", "gasp-002", "gasp-016"],
     status: "Show",
   },
   {
