@@ -55,7 +55,10 @@ export default defineNuxtConfig({
       wompiPublicKey: process.env.WOMPI_PUBLIC_KEY ?? 'pub_test_XXXXXXXX',
       appUrl: process.env.APP_URL ?? 'https://hauled.shop',
       whatsappNumber: process.env.WHATSAPP_NUMBER ?? '573000000000',
-      apiBase: process.env.API_BASE_URL ?? 'http://hauled-api.test',
+      // Producción: define API_BASE_URL en EasyPanel (ej: https://api.hauled.shop).
+      // Si no resuelve, useProducts cae al mock product_data sin romper la tienda.
+      // Dev local: hauled-api.test (Herd auto-domain).
+      apiBase: process.env.API_BASE_URL ?? (process.env.NODE_ENV === 'production' ? 'https://api.hauled.shop' : 'http://hauled-api.test'),
     },
   },
 
