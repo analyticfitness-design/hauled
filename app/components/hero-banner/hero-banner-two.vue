@@ -55,7 +55,14 @@
                 </div>
                 <div class="tp-slider-thumb-2 text-end">
                   <span class="tp-slider-thumb-2-gradient"></span>
-                  <img :src="item.img" alt="main-img" />
+                  <AppImage
+                    :src="item.img"
+                    alt="main-img"
+                    :priority="true"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    :widths="[600, 900, 1280]"
+                    class="img-fluid"
+                  />
                 </div>
               </div>
             </div>

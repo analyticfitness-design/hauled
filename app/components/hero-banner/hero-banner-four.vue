@@ -14,7 +14,14 @@
         class="tp-slider-item-4 tp-slider-height-4 p-relative khaki-bg d-flex align-items-center"
       >
         <div class="tp-slider-thumb-4">
-          <img :src="item.img" alt="slider-img" />
+          <AppImage
+            :src="item.img"
+            alt="slider-img"
+            :priority="true"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            :widths="[600, 900, 1280]"
+            class="img-fluid"
+          />
           <div class="tp-slider-thumb-4-shape">
             <span class="tp-slider-thumb-4-shape-1"></span>
             <span class="tp-slider-thumb-4-shape-2"></span>

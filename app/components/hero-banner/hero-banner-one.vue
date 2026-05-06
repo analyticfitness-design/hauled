@@ -73,7 +73,14 @@
             </div>
             <div class="col-xl-7 col-lg-6 col-md-6">
               <div class="tp-slider-thumb text-end">
-                <img :src="item.img" alt="slider-img" />
+                <AppImage
+                  :src="item.img"
+                  alt="slider-img"
+                  :priority="true"
+                  sizes="(max-width: 768px) 100vw, 58vw"
+                  :widths="[600, 900, 1280]"
+                  class="img-fluid"
+                />
               </div>
             </div>
           </div>

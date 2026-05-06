@@ -5,7 +5,13 @@
       style="background-color: #f4f4f4"
     >
       <nuxt-link :href="`/product-details/${item.id}`">
-        <img :src="item.img" :alt="item.title" />
+        <AppImage
+          :src="item.img"
+          :alt="item.title"
+          :widths="[300, 600, 900]"
+          sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
+          class="img-fluid"
+        />
       </nuxt-link>
 
       <!-- HAULED line badge (top left) -->
