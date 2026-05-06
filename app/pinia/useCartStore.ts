@@ -9,6 +9,15 @@ export const useCartStore = defineStore("cart_product", () => {
   let orderQuantity = ref<number>(1);
   let cartOffcanvas = ref<boolean>(false);
 
+  const CART_TTL_MS = 24 * 60 * 60 * 1000;
+
+  const saveCart = () => {
+    localStorage.setItem('cart_products', JSON.stringify({
+      items: cart_products.value,
+      savedAt: Date.now(),
+    }));
+  };
+
   const addCartProduct = (payload: IProduct) => {
     const isExist = cart_products.value.some((i) => i.id === payload.id);
     if (payload.status === 'out-of-stock') {
@@ -33,7 +42,7 @@ export const useCartStore = defineStore("cart_product", () => {
         return { ...item };
       });
     }
-    localStorage.setItem("cart_products", JSON.stringify(cart_products.value));
+    saveCart();
   };
 
   const increment = () => { orderQuantity.value += 1; };
@@ -46,19 +55,19 @@ export const useCartStore = defineStore("cart_product", () => {
       }
       return { ...item };
     });
-    localStorage.setItem("cart_products", JSON.stringify(cart_products.value));
+    saveCart();
   };
 
   const removeCartProduct = (payload: IProduct) => {
     cart_products.value = cart_products.value.filter((p) => p.id !== payload.id);
     toast.info(`${payload.title} eliminado del carrito`);
-    localStorage.setItem("cart_products", JSON.stringify(cart_products.value));
+    saveCart();
   };
 
   const clear_cart = () => {
     cart_products.value = [];
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem("cart_products", JSON.stringify([]));
+      localStorage.removeItem('cart_products');
     }
     toast.info('Carrito vaciado');
   };
@@ -66,8 +75,21 @@ export const useCartStore = defineStore("cart_product", () => {
   const initialOrderQuantity = () => { orderQuantity.value = 1; };
 
   const initializeCartProducts = () => {
-    const cartData = localStorage.getItem("cart_products");
-    if (cartData) { cart_products.value = JSON.parse(cartData); }
+    try {
+      const raw = localStorage.getItem('cart_products');
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      // Formato antiguo (array plano) o nuevo ({ items, savedAt })
+      const items = Array.isArray(parsed) ? parsed : parsed?.items;
+      const savedAt: number = Array.isArray(parsed) ? 0 : (parsed?.savedAt ?? 0);
+      if (items && Date.now() - savedAt < CART_TTL_MS) {
+        cart_products.value = items;
+      } else {
+        localStorage.removeItem('cart_products');
+      }
+    } catch {
+      localStorage.removeItem('cart_products');
+    }
   };
 
   // Total separado: items de stock vs encargos (encargos no suman al total de pago)

@@ -136,6 +136,11 @@ let payment_name = ref<string>('wompi');
 let termsAccepted = ref<boolean>(false);
 let processing = ref<boolean>(false);
 
+// Idempotency key: se genera al montar el componente; mismo valor si el usuario reintenta
+// sin recargar la página (evita duplicar pedidos por doble-clic o timeout).
+const idempotencyKey = ref('');
+onMounted(() => { idempotencyKey.value = crypto.randomUUID(); });
+
 const stockItems = computed(() =>
   cartStore.cart_products.filter(p => p.hauledLine !== 'encargo')
 );
@@ -201,21 +206,21 @@ const handleCheckout = async () => {
       },
     };
 
-    const res = await $fetch<{ wompi_redirect: string; order: { reference: string } }>(
+    const res = await $fetch<{ wompi_redirect_url: string; order: { reference: string } }>(
       `${apiBase}/api/v1/orders`,
       {
         method: 'POST',
         body: orderPayload,
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          'X-Idempotency-Key': idempotencyKey.value,
+        },
       }
     );
 
-    if (res?.wompi_redirect) {
-      cartStore.cart_products = [];
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('cart_products', '[]');
-      }
-      window.location.href = res.wompi_redirect;
+    if (res?.wompi_redirect_url) {
+      cartStore.clear_cart();
+      window.location.href = res.wompi_redirect_url;
     } else {
       toast.error('No se pudo iniciar el pago. Intenta de nuevo.');
     }

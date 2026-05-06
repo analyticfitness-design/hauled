@@ -4,13 +4,13 @@
       <div class="hauled-confirm-wrapper">
 
         <!-- Cargando -->
-        <div v-if="estado === 'cargando'" class="hauled-confirm-center">
+        <div v-if="status === 'loading'" class="hauled-confirm-center">
           <div class="hauled-spinner"></div>
           <p>Verificando tu pago...</p>
         </div>
 
         <!-- Aprobado -->
-        <div v-else-if="estado === 'APPROVED'" class="hauled-confirm-center">
+        <div v-else-if="status === 'approved'" class="hauled-confirm-center">
           <div class="hauled-confirm-icon hauled-confirm-ok">✅</div>
           <h2 class="hauled-confirm-title">¡Pedido confirmado!</h2>
           <p class="hauled-confirm-sub">Tu pago fue procesado exitosamente.</p>
@@ -25,7 +25,7 @@
         </div>
 
         <!-- Pendiente -->
-        <div v-else-if="estado === 'PENDING'" class="hauled-confirm-center">
+        <div v-else-if="status === 'pending' || status === 'processing'" class="hauled-confirm-center">
           <div class="hauled-confirm-icon hauled-confirm-pending">⏳</div>
           <h2 class="hauled-confirm-title">Pago en proceso</h2>
           <p class="hauled-confirm-sub">Tu pago está siendo verificado. Esto puede tomar unos minutos.</p>
@@ -52,41 +52,24 @@
 </template>
 
 <script setup lang="ts">
-import { useWompi } from '@/composables/useWompi';
+import { useOrderPolling } from '@/composables/useOrderPolling';
 
 useSeoMeta({ title: 'Confirmación de pago — HAULED' });
 
 const route = useRoute();
 const config = useRuntimeConfig();
-const { consultarTransaccion } = useWompi();
+const { status, startPolling } = useOrderPolling();
 
-const referencia = ref(route.query.ref as string ?? '');
-const estado = ref<string>('cargando');
+const referencia = route.query.ref as string ?? '';
 const waNumber = config.public.whatsappNumber as string;
 const waLink = computed(() => `https://wa.me/${waNumber}`);
 
-onMounted(async () => {
-  if (!referencia.value) {
-    estado.value = 'ERROR';
+onMounted(() => {
+  if (!referencia) {
+    status.value = 'error';
     return;
   }
-
-  // Polling: hasta 10 intentos cada 3s (max ~30s) hasta que Wompi confirme APPROVED/DECLINED.
-  const maxIntentos = 10;
-  const intervalo = 3000;
-
-  for (let i = 0; i < maxIntentos; i++) {
-    await new Promise(r => setTimeout(r, intervalo));
-    const tx = await consultarTransaccion(referencia.value);
-    const s = tx?.status;
-    if (s && s !== 'PENDING') {
-      estado.value = s;
-      return;
-    }
-  }
-
-  // Timeout: muestra como pendiente, NO como error — el webhook puede tardar más.
-  estado.value = 'PENDING';
+  startPolling(referencia);
 });
 </script>
 
