@@ -7,6 +7,7 @@
     <footer-one :primary_style="true" />
     <back-to-top />
     <!-- <modal-product /> -->
+    <cookie-banner />
   </div>
 </template>
 

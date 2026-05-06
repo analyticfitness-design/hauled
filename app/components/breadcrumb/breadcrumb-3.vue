@@ -5,7 +5,7 @@
         <div class="col-xl-8">
           <div class="tp-section-title-wrapper-7">
             <span class="tp-section-title-pre-7">{{ title }}</span>
-            <h3 class="tp-section-title-7" v-html="subtitle"></h3>
+            <h3 class="tp-section-title-7" v-html="sanitize(subtitle)"></h3>
           </div>
         </div>
       </div>
@@ -14,5 +14,12 @@
 </template>
 
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
+
 defineProps<{title:string;subtitle:string;center?:boolean}>()
+
+function sanitize(html: string): string {
+  if (import.meta.server) return html  // DOMPurify requires browser DOM
+  return DOMPurify.sanitize(html, { ALLOWED_TAGS: ['b', 'i', 'br', 'p', 'span', 'strong', 'em'] })
+}
 </script>

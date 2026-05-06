@@ -16,7 +16,31 @@ export default defineNuxtConfig({
         ],
       },
     ],
+    'nuxt-security',
   ],
+
+  security: {
+    headers: {
+      crossOriginEmbedderPolicy: 'unsafe-none', // required for Wompi iframe
+      contentSecurityPolicy: {
+        'default-src': ["'self'"],
+        'script-src': ["'self'", "'unsafe-inline'", 'https://checkout.wompi.co', 'https://cdn.jsdelivr.net'],
+        'connect-src': ["'self'", 'https://api.hauled.shop', 'https://production.wompi.co', 'https://sandbox.wompi.co'],
+        'img-src': ["'self'", 'data:', 'https:'],
+        'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        'font-src': ["'self'", 'data:', 'https://fonts.gstatic.com'],
+        'frame-src': ['https://checkout.wompi.co'],
+      },
+      xFrameOptions: 'DENY',
+      xContentTypeOptions: 'nosniff',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+    },
+    rateLimiter: false, // rate limiting handled by the backend API
+    requestSizeLimiter: {
+      maxRequestSizeInBytes: 2000000,
+      maxUploadRequestInBytes: 8000000,
+    },
+  },
 
   app: {
     head: {

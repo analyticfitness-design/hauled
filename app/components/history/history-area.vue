@@ -22,7 +22,7 @@
                   <div class="col-xl-5 col-lg-6 col-md-6">
                     <div class="tp-history-wrapper pr-45">
                       <div class="tp-history-content mb-40">
-                        <h3 class="tp-history-title" v-html="item.title"></h3>
+                        <h3 class="tp-history-title" v-html="sanitize(item.title)"></h3>
                         <p>
                           {{item.subtitle_1}}
                         </p>
@@ -38,7 +38,7 @@
                   <div class="col-xl-7 col-lg-6 col-md-6">
                     <div class="tp-history-thumb-wrapper ml-150 p-relative">
                       <div class="tp-history-thumb-text">
-                        <p v-html="item.thumb_text"></p>
+                        <p v-html="sanitize(item.thumb_text)"></p>
                       </div>
                       <div class="tp-history-thumb m-img">
                         <img :src="item.img" alt="thumb_img" />
@@ -83,6 +83,12 @@
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { FreeMode, Thumbs, EffectFade } from "swiper/modules";
+import DOMPurify from 'dompurify';
+
+function sanitize(html: string): string {
+  if (import.meta.server) return html
+  return DOMPurify.sanitize(html, { ALLOWED_TAGS: ['b', 'i', 'br', 'p', 'span', 'strong', 'em'] })
+}
 
 let thumbsSwiper = ref(null);
 

@@ -46,16 +46,20 @@
         <!-- Info lateral -->
         <div class="h-contact-info-col">
 
-          <a :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola HAULED, tengo una consulta 👋')}`" target="_blank" rel="noopener" class="h-wa-card">
-            <div class="h-wa-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <!-- WhatsApp destacado -->
+          <div class="h-wa-featured">
+            <div class="h-wa-featured-header">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="h-wa-featured-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <div>
+                <p class="h-wa-featured-title">¿Prefieres hablar directo?</p>
+                <p class="h-wa-featured-sub">Respondemos en menos de 2 horas en horario hábil (Lun–Sáb 9am–9pm)</p>
+              </div>
             </div>
-            <div class="h-wa-text">
-              <span class="h-wa-label">WhatsApp directo</span>
-              <span class="h-wa-number">+57 {{ whatsappDisplay }}</span>
-            </div>
-            <span class="h-wa-arrow">→</span>
-          </a>
+            <button type="button" class="h-wa-featured-btn" @click="openWhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Escríbenos por WhatsApp
+            </button>
+          </div>
 
           <div class="h-info-card">
             <div class="h-info-item">
@@ -120,11 +124,8 @@
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 
-const config = useRuntimeConfig();
-const whatsappNumber = config.public.whatsappNumber as string;
-const whatsappDisplay = computed(() =>
-  whatsappNumber.replace(/^57/, '').replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3')
-);
+const { openChat } = useWhatsApp();
+const openWhatsApp = () => openChat('support');
 
 const sent = ref(false);
 
@@ -333,4 +334,55 @@ a.h-info-value:hover { color: var(--h-blue, #4CC9F0); }
 
 /* Map */
 .h-map-section { background: var(--h-black, #111); line-height: 0; }
+
+/* WhatsApp featured block */
+.h-wa-featured {
+  background: #25D366;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.h-wa-featured-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.h-wa-featured-icon { flex-shrink: 0; margin-top: 2px; }
+.h-wa-featured-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 4px;
+}
+.h-wa-featured-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0;
+}
+.h-wa-featured-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #fff;
+  color: #1a8c44;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms);
+  min-height: 44px;
+}
+.h-wa-featured-btn:hover { background: #111; color: #fff; }
 </style>
