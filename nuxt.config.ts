@@ -6,6 +6,15 @@ export default defineNuxtConfig({
     logLevel: process.env.NODE_ENV === 'development' ? 1 : 3,
     preset: process.env.VERCEL ? 'vercel' : undefined,
   },
+  routeRules: {
+    '/': { isr: 60 },
+    '/shop': { isr: 60 },
+    '/shop/**': { isr: 60 },
+    '/product/**': { isr: 300 },
+    '/checkout/**': { ssr: true, headers: { 'Cache-Control': 'no-store' } },
+    '/admin/**': { ssr: false },
+    '/blog/**': { isr: 3600 },
+  },
   modules: [
     [
       '@pinia/nuxt',
@@ -93,6 +102,7 @@ export default defineNuxtConfig({
       // Si no resuelve, useProducts cae al mock product_data sin romper la tienda.
       // Dev local: hauled-api.test (Herd auto-domain).
       apiBase: process.env.API_BASE_URL ?? (process.env.NODE_ENV === 'production' ? 'https://api.hauled.shop' : 'http://hauled-api.test'),
+      cdnUrl: process.env.NUXT_PUBLIC_CDN_URL ?? 'https://cdn.hauled.shop',
     },
   },
 
