@@ -42,3 +42,6 @@ desktop.ini
 _workflows_pending/
 docs/
 GUIA-DEPLOY-HAULED.html
+
+# ═══ Git worktrees (superpowers) ═══
+.worktrees/
