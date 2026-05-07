@@ -3,15 +3,24 @@
     class="tp-header-main-right d-flex align-items-center justify-content-end"
   >
     <div class="tp-header-login d-none d-lg-block">
-      <nuxt-link href="/profile" class="d-flex align-items-center">
+      <nuxt-link
+        :href="auth.isLoggedIn ? '/profile' : '/login'"
+        class="d-flex align-items-center"
+      >
         <div class="tp-header-login-icon">
           <span>
             <SvgUser />
           </span>
         </div>
         <div class="tp-header-login-content d-none d-xl-block">
-          <span>Hello, Sign In</span>
-          <h5 class="tp-header-login-title">Your Account</h5>
+          <template v-if="auth.isLoggedIn">
+            <span>Hola, {{ auth.displayName }}</span>
+            <h5 class="tp-header-login-title">Mi cuenta</h5>
+          </template>
+          <template v-else>
+            <span>Hola, ingresa</span>
+            <h5 class="tp-header-login-title">Tu cuenta</h5>
+          </template>
         </div>
       </nuxt-link>
     </div>
@@ -50,8 +59,10 @@
 import { useCartStore } from '@/pinia/useCartStore';
 import { useWishlistStore } from '@/pinia/useWishlistStore';
 import { useUtilityStore} from '@/pinia/useUtilityStore';
+import { useAuthStore } from '@/pinia/useAuthStore';
 
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
 const utilsStore = useUtilityStore();
+const auth = useAuthStore();
 </script>

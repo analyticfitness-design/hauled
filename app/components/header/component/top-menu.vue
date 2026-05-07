@@ -32,35 +32,61 @@
       </ul>
     </div>
     <div class="tp-header-top-menu-item tp-header-setting">
-      <span @click="handleActive('setting')" class="tp-header-setting-toggle" id="tp-header-setting-toggle">Setting</span>
+      <span @click="handleActive('setting')" class="tp-header-setting-toggle" id="tp-header-setting-toggle">
+        {{ auth.isLoggedIn ? auth.displayName : 'Cuenta' }}
+      </span>
       <ul :class="`${isActive === 'setting' ? 'tp-setting-list-open' : ''}`">
-        <li>
-          <nuxt-link href="/profile">My Profile</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link href="/wishlist">Wishlist</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link href="/cart">Cart</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link href="/login">Logout</nuxt-link>
-        </li>
+        <template v-if="auth.isLoggedIn">
+          <li>
+            <nuxt-link href="/profile">Mi cuenta</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link href="/wishlist">Lista de deseos</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link href="/cart">Carrito</nuxt-link>
+          </li>
+          <li>
+            <a href="#" @click.prevent="onLogout">Cerrar sesión</a>
+          </li>
+        </template>
+        <template v-else>
+          <li>
+            <nuxt-link href="/login">Iniciar sesión</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link href="/register">Crear cuenta</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link href="/wishlist">Lista de deseos</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link href="/cart">Carrito</nuxt-link>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
-let isActive = ref<string>('')
-  // handle active
-  const handleActive = (type:string) => {
-    if(type === isActive.value){
-      isActive.value = ''
-    }
-    else {
-      isActive.value = type
-    }
+import { ref } from 'vue';
+import { useAuthStore } from '@/pinia/useAuthStore';
+
+const auth = useAuthStore();
+
+let isActive = ref<string>('');
+
+const handleActive = (type: string) => {
+  if (type === isActive.value) {
+    isActive.value = '';
+  } else {
+    isActive.value = type;
   }
+};
+
+async function onLogout() {
+  isActive.value = '';
+  await auth.logout();
+}
 </script>
