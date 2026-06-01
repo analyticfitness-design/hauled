@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "chrome-devtools-mcp@latest",
+        "--browserUrl",
+        "http://127.0.0.1:9222"
+      ]
+    }
+  },
+  "customInstructions": "Hauled es Nuxt 4 SSR (Bootstrap 5.3 + SCSS, NO Tailwind) que consume la API hauled-api por REST. Diseño = NIVEL Gymshark con identidad propia (acento Cyan eléctrico #4CC9F0, display Raleway, firma 'Cargo Tag / Sello Aduana'); fuente de verdad: bots-especializados/DIRECTOR-VISUAL-HAULED.md + app/assets/scss/theme/_tokens.scss. Usar tokens SCSS, no hardcodear. No filtrar secretos al cliente (solo runtimeConfig.public.*). Voz 'Moda que Habla' (tuteo neutro CO, cero voseo, cero marketing humo). Cero atribucion de IA en commits. Build SIEMPRE local/CI, nunca en el container.",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Bash",      "hooks": [{ "type": "command", "command": "\"C:\\Users\\GODSF\\.config\\herd\\bin\\php.bat\" \"C:\\Users\\GODSF\\Herd\\Hauled\\.claude\\hooks\\dangerous-actions-blocker.php\"", "timeout": 8000 }] },
+      { "matcher": "Edit",      "hooks": [{ "type": "command", "command": "\"C:\\Users\\GODSF\\.config\\herd\\bin\\php.bat\" \"C:\\Users\\GODSF\\Herd\\Hauled\\.claude\\hooks\\dangerous-actions-blocker.php\"", "timeout": 8000 }] },
+      { "matcher": "Write",     "hooks": [{ "type": "command", "command": "\"C:\\Users\\GODSF\\.config\\herd\\bin\\php.bat\" \"C:\\Users\\GODSF\\Herd\\Hauled\\.claude\\hooks\\dangerous-actions-blocker.php\"", "timeout": 8000 }] },
+      { "matcher": "MultiEdit", "hooks": [{ "type": "command", "command": "\"C:\\Users\\GODSF\\.config\\herd\\bin\\php.bat\" \"C:\\Users\\GODSF\\Herd\\Hauled\\.claude\\hooks\\dangerous-actions-blocker.php\"", "timeout": 8000 }] }
+    ]
+  }
+}
