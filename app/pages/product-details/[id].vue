@@ -3,12 +3,6 @@
     <div v-if="product">
       <!-- product detail area (includes hk-pd breadcrumb + grid) -->
       <product-details-area :product="product" />
-
-      <!-- related products -->
-      <product-related
-        :product-id="product.id"
-        :category="product.category?.name ?? product.parent ?? ''"
-      />
     </div>
 
     <!-- not found -->

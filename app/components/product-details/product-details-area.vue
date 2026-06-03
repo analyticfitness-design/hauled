@@ -291,6 +291,7 @@ function handleAddToCart() {
   for (let i = cartStore.orderQuantity; i < qty.value; i++) cartStore.increment()
   for (let i = cartStore.orderQuantity; i > qty.value; i--) cartStore.decrement()
   cartStore.addCartProduct(props.product, selectedSize.value || undefined)
+  cartStore.openCart()
 }
 
 // ── WhatsApp encargo ────────────────────────────────────────────────────────────

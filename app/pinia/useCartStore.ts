@@ -118,6 +118,8 @@ export const useCartStore = defineStore("cart_product", () => {
   });
 
   const handleCartOffcanvas = () => { cartOffcanvas.value = !cartOffcanvas.value; };
+  const openCart = () => { cartOffcanvas.value = true; };
+  const closeCart = () => { cartOffcanvas.value = false; };
 
   onMounted(() => { initializeCartProducts(); });
 
@@ -132,6 +134,8 @@ export const useCartStore = defineStore("cart_product", () => {
     initialOrderQuantity,
     totalPriceQuantity,
     handleCartOffcanvas,
+    openCart,
+    closeCart,
     cartOffcanvas,
     orderQuantity,
     increment,

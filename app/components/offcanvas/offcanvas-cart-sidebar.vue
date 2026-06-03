@@ -146,11 +146,9 @@ function formatTotal(amount: number): string {
 }
 
 function formatItemPrice(item: IProduct): string {
+  // Precio desde la API tal cual (item.price ya es el precio final). NO recalcular
+  // descuento aquí — debe coincidir con el subtotal del store.
   const qty = item.orderQuantity ?? 1;
-  let unitPrice = item.price;
-  if (item.discount && item.discount > 0) {
-    unitPrice = unitPrice - (unitPrice * item.discount) / 100;
-  }
-  return cop.format(unitPrice * qty);
+  return cop.format(item.price * qty);
 }
 </script>

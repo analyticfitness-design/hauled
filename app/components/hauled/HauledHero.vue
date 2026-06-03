@@ -65,69 +65,13 @@ const STRIP_CATS = [
   { label: 'Encargos USA', href: '/encargos' },
 ]
 
-const config = useRuntimeConfig()
-const apiBase = (config.public.apiBase as string) || 'https://api.hauled.shop'
-
-interface ApiProductRaw {
-  id: number
-  title: string
-  slug: string
-  description?: string
-  price: number
-  price_usd?: number
-  price_usd_full?: number
-  price_cop_sale?: number
-  stock: number
-  hauled_line?: string
-  images?: string[]
-  sizes?: string[]
-  brand?: { name: string }
-  category?: { name: string; slug: string }
-}
-
-interface ApiResponse {
-  data: ApiProductRaw[]
-}
+const { fetchList } = useProducts()
 
 const { data: featProduct } = await useAsyncData<IProduct | null>(
   'home-hero-feat',
   async () => {
-    try {
-      const res = await $fetch<ApiResponse>(`${apiBase}/api/v1/products`, {
-        params: { per_page: '8', hauled_line: 'originals' },
-      })
-      const items = res.data ?? []
-      const p = items[0]
-      if (!p) return null
-      return {
-        id: String(p.id),
-        sku: p.slug,
-        title: p.title,
-        slug: p.slug,
-        description: p.description ?? '',
-        img: p.images?.[0] ?? '/img/products/placeholder.jpg',
-        imageURLs: [],
-        parent: p.category?.name ?? '',
-        children: '',
-        price: p.price_cop_sale ?? p.price,
-        discount: 0,
-        quantity: p.stock ?? 0,
-        brand: { name: p.brand?.name ?? 'GASP' },
-        category: { name: p.category?.name ?? '' },
-        status: 'in-stock',
-        productType: 'fashion',
-        hauledLine: (p.hauled_line as 'originals' | 'basics' | 'encargo') ?? 'originals',
-        sizes: p.sizes ?? [],
-        unit: '1pc',
-        featured: false,
-        sellCount: 0,
-        tags: [],
-        reviews: [],
-        additionalInformation: [],
-      } as IProduct
-    } catch {
-      return null
-    }
+    const items = await fetchList({ per_page: '8', line: 'originals' })
+    return items[0] ?? null
   },
 )
 

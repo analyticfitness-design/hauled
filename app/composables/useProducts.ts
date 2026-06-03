@@ -99,5 +99,19 @@ export function useProducts() {
     }
   }
 
-  return { products, loading, error, totalPages, usedFallback, fetchProducts }
+  // Versión pura para usar dentro de useAsyncData (SSR): hace fetch + map y
+  // RETORNA el array (no muta refs). Fallback a mock si la API cae. Fuente única
+  // de mapeo — evita reimplementar mapApiProduct en cada componente.
+  const fetchList = async (params: Record<string, string> = {}): Promise<IProduct[]> => {
+    try {
+      const data = await $fetch<ApiResponse>(`${apiBase}/api/v1/products`, {
+        params: { per_page: '24', ...params },
+      })
+      return (data.data ?? []).map(mapApiProduct)
+    } catch (e) {
+      return product_data as IProduct[]
+    }
+  }
+
+  return { products, loading, error, totalPages, usedFallback, fetchProducts, fetchList }
 }
