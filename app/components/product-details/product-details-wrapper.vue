@@ -37,12 +37,12 @@
         <span v-else-if="product.status === 'in-stock'">En stock</span>
         <span v-else>Agotado</span>
       </div>
-      <div class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
+      <div v-if="product.reviews && product.reviews.length > 0" class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
         <div class="tp-product-details-rating">
           <span v-for="i in 5" :key="i"><i class="fa-solid fa-star"></i></span>
         </div>
         <div class="tp-product-details-reviews">
-          <span>({{ product.reviews?.length ?? 0 }} reseñas)</span>
+          <span>({{ product.reviews.length }} reseñas)</span>
         </div>
       </div>
     </div>
@@ -120,19 +120,20 @@
     <!-- Acciones -->
     <div class="tp-product-details-action-wrapper">
       <!-- Para encargos: botón de WhatsApp -->
-      <div v-if="product.hauledLine === 'encargo'">
+      <div v-if="product.hauledLine === 'encargo'" class="hauled-pdp-cta-wrap">
         <a
-          href="https://wa.me/573000000000?text=Hola%20HAULED%2C%20quiero%20cotizar%20un%20encargo"
+          :href="waEncargoLink"
           target="_blank"
+          rel="noopener noreferrer"
           class="tp-product-details-add-to-cart-btn w-100 hauled-whatsapp-btn"
           style="display:block;text-align:center;text-decoration:none;margin-top:12px"
         >
-          💬 Solicitar cotización por WhatsApp
+          Solicitar cotización por WhatsApp
         </a>
       </div>
 
       <!-- Para stock normal: cantidad + carrito -->
-      <div v-else>
+      <div v-else class="hauled-pdp-cta-wrap">
         <h3 class="tp-product-details-action-title">Cantidad</h3>
         <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
           <div class="tp-product-details-quantity">
@@ -143,12 +144,12 @@
             </div>
           </div>
           <div class="tp-product-details-add-to-cart mb-15 w-100">
-            <button @click="cartStore.addCartProduct(product)" class="tp-product-details-add-to-cart-btn w-100">
+            <button @click="handleAddToCart" class="tp-product-details-add-to-cart-btn w-100">
               Agregar al carrito
             </button>
           </div>
         </div>
-        <button @click="cartStore.addCartProduct(product)" class="tp-product-details-buy-now-btn w-100 text-center">
+        <button @click="handleAddToCart" class="tp-product-details-buy-now-btn w-100 text-center">
           Comprar ahora
         </button>
       </div>
@@ -217,11 +218,13 @@ import { useCartStore } from "@/pinia/useCartStore";
 import { useCompareStore } from "@/pinia/useCompareStore";
 import { useWishlistStore } from "@/pinia/useWishlistStore";
 import HauledLineBadge from "@/components/hauled/HauledLineBadge.vue";
+import { toast } from 'vue3-toastify';
 
 const compareStore = useCompareStore();
 const wishlistStore = useWishlistStore();
 const productStore = useProductStore();
 const cartStore = useCartStore();
+const { link: waLink } = useWhatsApp();
 
 const props = withDefaults(defineProps<{ product: IProduct; isShowBottom?: boolean }>(), {
   isShowBottom: true,
@@ -234,6 +237,22 @@ let showSizeGuide = ref(false);
 const hasColorData = computed(() =>
   props.product.imageURLs.some(item => item?.color?.name)
 );
+
+const hasSizes = computed(() =>
+  props.product.sizes && props.product.sizes.length > 0
+);
+
+const waEncargoLink = computed(() =>
+  waLink('encargo_inquiry', { description: props.product.title })
+);
+
+const handleAddToCart = () => {
+  if (hasSizes.value && !selectedSize.value) {
+    toast.error('Elige una talla antes de agregar al carrito');
+    return;
+  }
+  cartStore.addCartProduct(props.product, selectedSize.value || undefined);
+};
 </script>
 
 <style>
@@ -324,8 +343,8 @@ const hasColorData = computed(() =>
 
 /* Encargo info */
 .hauled-encargo-info {
-  background: rgba(76,201,240,0.06);
-  border: 1px solid rgba(76,201,240,0.2);
+  background: rgba(76, 201, 240,0.06);
+  border: 1px solid rgba(76, 201, 240,0.2);
   border-radius: 6px;
   padding: 16px;
   margin: 16px 0;
@@ -361,17 +380,20 @@ const hasColorData = computed(() =>
 
 /* Mobile sticky CTA */
 @media (max-width: 767px) {
-  .tp-product-details-add-btn-wrap,
-  .tp-product-details-action-sm {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 100 !important;
-    background: #fff !important;
-    border-top: 1px solid rgba(0,0,0,0.08) !important;
-    padding: 12px 16px !important;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08) !important;
+  .hauled-pdp-cta-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  /* Give the page enough bottom padding so content is not hidden behind the sticky bar */
+  .tp-product-details-wrapper.has-sticky {
+    padding-bottom: 80px;
   }
 }
 </style>
@@ -380,7 +402,7 @@ const hasColorData = computed(() =>
 .hauled-encargo-info {
   background: #f4f4f4;
   border: 1px solid #e0e0e0;
-  border-left: 4px solid #4cc9f0;
+  border-left: 4px solid #4CC9F0;
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -396,18 +418,18 @@ const hasColorData = computed(() =>
 .hauled-encargo-row:last-child { margin-bottom: 0; }
 .hauled-encargo-icon { font-size: 1rem; }
 .hauled-text-toggle {
-  color: #4cc9f0;
+  color: #4CC9F0;
   cursor: pointer;
   font-weight: 600;
   margin-left: 4px;
 }
 .hauled-cotizar-price {
-  color: #4cc9f0 !important;
+  color: #4CC9F0 !important;
   font-size: 1.4rem !important;
 }
 .hauled-size-guide {
   font-size: 0.75rem;
-  color: #4cc9f0;
+  color: #4CC9F0;
   cursor: pointer;
   font-weight: 400;
   margin-left: 10px;
@@ -462,7 +484,7 @@ const hasColorData = computed(() =>
   color: #444;
 }
 .hauled-size-guide-content button {
-  background: #4cc9f0;
+  background: #4CC9F0;
   color: #fff;
   border: none;
   border-radius: 6px;

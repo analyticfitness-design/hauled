@@ -7,10 +7,7 @@
           <!-- Col 1: Brand -->
           <div class="col-xl-4 col-lg-4 col-md-6 col-12 hfoot-col">
             <div class="hfoot-brand">
-              <nuxt-link to="/" class="hfoot-logo">
-                <span class="hfoot-logo-word">HAULED</span>
-                <span class="hfoot-logo-sub">Direct from the States</span>
-              </nuxt-link>
+              <hauled-logo size="lg" variant="light" class="hfoot-logo" />
               <p class="hfoot-desc">
                 Ropa original de USA traída directamente a Colombia. Nike, Jordan, Gap, GASP y más — autenticidad garantizada, envío nacional.
               </p>
@@ -138,29 +135,7 @@ const waLink = link('support');
 .hfoot-row { row-gap: 40px; }
 
 /* ── Brand ────────────────────────────────────────── */
-.hfoot-logo {
-  display: inline-flex;
-  flex-direction: column;
-  text-decoration: none;
-  margin-bottom: 20px;
-  gap: 3px;
-}
-.hfoot-logo-word {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: 1.85rem;
-  letter-spacing: var(--h-ls-logo, 10px);
-  color: #fff;
-  text-transform: uppercase;
-}
-.hfoot-logo-sub {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 0.46rem;
-  letter-spacing: var(--h-ls-sub, 7px);
-  color: var(--h-blue, #4CC9F0);
-  text-transform: uppercase;
-}
+.hfoot-logo { margin-bottom: 20px; }
 .hfoot-desc {
   font-family: 'Inter', sans-serif;
   font-size: var(--h-fs-small, 0.82rem);

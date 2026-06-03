@@ -37,7 +37,7 @@
             <h2 class="enc-section-title">Arma tu encargo aquí</h2>
             <p class="enc-section-sub">
               Agrega los productos que quieres traer de USA. Te cotizamos en menos de 1 hora por WhatsApp.<br />
-              <strong>Latencia estimada: 15–20 días hábiles</strong> desde la confirmación del pedido.
+              <strong>Latencia estimada: 10–25 días hábiles</strong> desde la confirmación del pedido.
             </p>
           </div>
 
@@ -126,7 +126,7 @@
               </div>
               <div class="enc-summary-stat">
                 <span class="enc-summary-label">Tiempo estimado</span>
-                <span class="enc-summary-value">15–20 días</span>
+                <span class="enc-summary-value">10–25 días</span>
               </div>
             </div>
 
@@ -328,7 +328,7 @@ const submitOrder = () => {
   });
 
   msg += '\n─────────────────\n';
-  msg += `⏱ *Latencia esperada:* 15–20 días hábiles\n`;
+  msg += `⏱ *Latencia esperada:* 10–25 días hábiles\n`;
   msg += `💬 Quedo atento a la cotización en COP. ¡Gracias!`;
 
   const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
@@ -630,8 +630,8 @@ const faqs = [
   transition: all 320ms ease;
 }
 .enc-cat:hover {
-  background: rgba(76,201,240,0.06);
-  border-color: rgba(76,201,240,0.3);
+  background: rgba(76, 201, 240,0.06);
+  border-color: rgba(76, 201, 240,0.3);
   transform: translateY(-3px);
 }
 .enc-cat-icon {
@@ -794,11 +794,11 @@ const faqs = [
 .enc-cta-primary--accent {
   background: #4CC9F0;
   color: #111;
-  box-shadow: 0 8px 24px rgba(76,201,240,0.35);
+  box-shadow: 0 8px 24px rgba(76, 201, 240,0.35);
 }
 .enc-cta-primary--accent:hover {
   background: #3bb8df;
-  box-shadow: 0 12px 32px rgba(76,201,240,0.5);
+  box-shadow: 0 12px 32px rgba(76, 201, 240,0.5);
 }
 
 /* ═══ BUILDER ═════════════════════════════════════════ */
@@ -921,7 +921,7 @@ const faqs = [
   background: #fff;
   border-color: #4CC9F0;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(76,201,240,0.15);
+  box-shadow: 0 0 0 3px rgba(76, 201, 240,0.15);
 }
 .enc-textarea { resize: vertical; min-height: 60px; }
 
@@ -932,7 +932,7 @@ const faqs = [
   gap: 10px;
   width: 100%;
   background: transparent;
-  border: 2px dashed rgba(76,201,240,0.4);
+  border: 2px dashed rgba(76, 201, 240,0.4);
   color: #4CC9F0;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
@@ -946,7 +946,7 @@ const faqs = [
   margin-bottom: 24px;
 }
 .enc-add-btn:hover {
-  background: rgba(76,201,240,0.05);
+  background: rgba(76, 201, 240,0.05);
   border-color: #4CC9F0;
   transform: translateY(-2px);
 }

@@ -62,7 +62,7 @@
 
         <!-- Resumen del pedido -->
         <div class="col-xl-3 col-lg-4 col-md-6">
-          <div class="tp-cart-checkout-wrapper">
+          <div class="tp-cart-checkout-wrapper hauled-cart-summary-sticky">
             <div class="tp-cart-checkout-top d-flex align-items-center justify-content-between">
               <span class="tp-cart-checkout-top-title">Subtotal</span>
               <span class="tp-cart-checkout-top-price">
@@ -75,20 +75,20 @@
               <h4 class="tp-cart-checkout-shipping-title">Envío</h4>
               <div class="tp-cart-checkout-shipping-option-wrapper">
                 <div class="tp-cart-checkout-shipping-option">
-                  <input id="envio_bucaramanga" type="radio" name="shipping" />
-                  <label @click="handleShippingCost(0)" for="envio_bucaramanga">
+                  <input id="envio_bucaramanga" type="radio" name="shipping" v-model="cartStore.shippingOption" value="bga" />
+                  <label for="envio_bucaramanga">
                     Bucaramanga: <span>Gratis</span>
                   </label>
                 </div>
                 <div class="tp-cart-checkout-shipping-option">
-                  <input id="envio_nacional" type="radio" name="shipping" />
-                  <label @click="handleShippingCost(22000)" for="envio_nacional">
+                  <input id="envio_nacional" type="radio" name="shipping" v-model="cartStore.shippingOption" value="nac" />
+                  <label for="envio_nacional">
                     Nacional: <span>{{ formatPrice(22000) }}</span>
                   </label>
                 </div>
                 <div class="tp-cart-checkout-shipping-option">
-                  <input id="envio_gratis" type="radio" name="shipping" />
-                  <label @click="handleShippingCost(0)" for="envio_gratis">
+                  <input id="envio_gratis" type="radio" name="shipping" v-model="cartStore.shippingOption" value="free" />
+                  <label for="envio_gratis">
                     Nacional gratis (+$300.000)
                   </label>
                 </div>
@@ -98,7 +98,7 @@
             <!-- Total -->
             <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
               <span>Total</span>
-              <span>{{ formatPrice(cartStore.totalPriceQuantity.total + shipCost) }}</span>
+              <span>{{ formatPrice(cartStore.totalPriceQuantity.total + cartStore.shipCost) }}</span>
             </div>
 
             <!-- CTA -->
@@ -125,26 +125,29 @@
 <script setup lang="ts">
 import { useCartStore } from "@/pinia/useCartStore";
 const cartStore = useCartStore();
-let shipCost = ref<number>(0);
 let couponCode = ref<string>('');
 
 const handleCouponSubmit = () => {
   // TODO: conectar con API de cupones
 };
-
-const handleShippingCost = (value: number) => {
-  shipCost.value = value;
-};
 </script>
 
 <style scoped>
+/* Sticky cart summary ≥lg (P1) */
+@media (min-width: 992px) {
+  .hauled-cart-summary-sticky {
+    position: sticky;
+    top: 90px;
+  }
+}
+
 .hauled-encargo-cart-notice {
   display: flex;
   gap: 12px;
   align-items: flex-start;
   background: #f4f4f4;
   border: 1px solid #e0e0e0;
-  border-left: 4px solid #4cc9f0;
+  border-left: 4px solid #4CC9F0;
   border-radius: 8px;
   padding: 14px 16px;
   margin-bottom: 20px;

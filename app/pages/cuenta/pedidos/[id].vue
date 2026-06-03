@@ -14,13 +14,13 @@
           <!-- Error -->
           <div v-else-if="error || !order" style="text-align:center; padding: 40px 0;">
             <p style="color:#e53e3e;">No se encontró el pedido.</p>
-            <nuxt-link to="/cuenta/pedidos" style="color:#4cc9f0;font-weight:700;text-decoration:none;">← Volver a mis pedidos</nuxt-link>
+            <nuxt-link to="/cuenta/pedidos" style="color:#4CC9F0;font-weight:700;text-decoration:none;">← Volver a mis pedidos</nuxt-link>
           </div>
 
           <!-- Detalle -->
           <div v-else>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-              <nuxt-link to="/cuenta/pedidos" style="font-size:0.82rem;color:#4cc9f0;font-weight:700;text-decoration:none;">← Mis pedidos</nuxt-link>
+              <nuxt-link to="/cuenta/pedidos" style="font-size:0.82rem;color:#4CC9F0;font-weight:700;text-decoration:none;">← Mis pedidos</nuxt-link>
               <span :class="['hauled-status-badge', `status-${order.status}`]">{{ statusLabel(order.status) }}</span>
             </div>
 
@@ -162,7 +162,7 @@ const statusLabel = (s: string) => ({
   width: 36px;
   height: 36px;
   border: 3px solid #e0e0e0;
-  border-top-color: #4cc9f0;
+  border-top-color: #4CC9F0;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto;

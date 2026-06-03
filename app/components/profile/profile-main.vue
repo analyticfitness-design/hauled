@@ -130,7 +130,7 @@ onMounted(loadCounters);
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: #4cc9f0;
+  background: #4CC9F0;
   color: #111;
   display: flex;
   align-items: center;

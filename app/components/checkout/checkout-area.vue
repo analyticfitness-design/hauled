@@ -7,15 +7,25 @@
           Volver a la tienda
         </nuxt-link>
       </div>
-      <div v-else class="row">
-        <div class="col-xl-7 col-lg-7">
-          <!-- checkout verify start -->
-          <checkout-verify />
-          <!-- checkout verify end -->
+      <div v-else>
+        <!-- Stepper visual (P1) -->
+        <div class="hauled-checkout-stepper">
+          <span class="hauled-step hauled-step--done">CARRITO</span>
+          <span class="hauled-step-sep">→</span>
+          <span class="hauled-step hauled-step--active">DATOS</span>
+          <span class="hauled-step-sep">→</span>
+          <span class="hauled-step">PAGO</span>
+          <span class="hauled-step-sep">→</span>
+          <span class="hauled-step">CONFIRMACIÓN</span>
         </div>
-        <!-- form start -->
+
+        <!-- checkout verify start -->
+        <checkout-verify />
+        <!-- checkout verify end -->
+
+        <!-- Two-column layout: billing form left, order summary right -->
         <form>
-          <div class="row">
+          <div class="row g-4">
             <div class="col-lg-7">
               <div class="tp-checkout-bill-area">
                 <h3 class="tp-checkout-bill-title">Datos de facturación</h3>
@@ -23,13 +33,14 @@
               </div>
             </div>
             <div class="col-lg-5">
-              <!-- checkout place order -->
-              <checkout-order :billing-ref="billingRef" />
-              <!-- checkout place order -->
+              <div class="hauled-checkout-summary-sticky">
+                <!-- checkout place order -->
+                <checkout-order :billing-ref="billingRef" />
+                <!-- checkout place order -->
+              </div>
             </div>
           </div>
         </form>
-        <!-- form end -->
       </div>
     </div>
   </section>
@@ -41,3 +52,44 @@ import {useCartStore} from '@/pinia/useCartStore';
 const cartStore = useCartStore()
 const billingRef = ref<{ form: any } | null>(null);
 </script>
+
+<style scoped>
+/* ── Progress stepper (P1) ── */
+.hauled-checkout-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 0 24px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.hauled-step {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+}
+.hauled-step--done {
+  color: rgba(0,0,0,0.5);
+}
+.hauled-step--active {
+  color: var(--h-black, #111);
+  border-bottom: 2px solid var(--h-blue, #4CC9F0);
+  padding-bottom: 2px;
+}
+.hauled-step-sep {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(0,0,0,0.25);
+}
+
+/* ── Sticky order summary ≥lg (P1) ── */
+@media (min-width: 992px) {
+  .hauled-checkout-summary-sticky {
+    position: sticky;
+    top: 90px;
+  }
+}
+</style>

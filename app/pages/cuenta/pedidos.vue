@@ -64,7 +64,7 @@
               <div style="margin-top:12px;text-align:right;">
                 <nuxt-link
                   :to="`/cuenta/pedidos/${order.id}`"
-                  style="font-size:0.82rem;color:#4cc9f0;font-weight:700;text-decoration:none;"
+                  style="font-size:0.82rem;color:#4CC9F0;font-weight:700;text-decoration:none;"
                 >
                   Ver detalle →
                 </nuxt-link>
@@ -141,7 +141,7 @@ const statusLabel = (s: string) => ({
   width: 36px;
   height: 36px;
   border: 3px solid #e0e0e0;
-  border-top-color: #4cc9f0;
+  border-top-color: #4CC9F0;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto;

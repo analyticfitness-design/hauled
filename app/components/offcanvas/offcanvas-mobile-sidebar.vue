@@ -18,10 +18,7 @@
           class="offcanvas__top mb-70 d-flex justify-content-between align-items-center"
         >
           <div class="offcanvas__logo logo">
-            <nuxt-link href="/" class="hoff-logo">
-              <span class="hoff-logo-word">HAULED</span>
-              <span class="hoff-logo-sub">Direct from the States</span>
-            </nuxt-link>
+            <hauled-logo size="md" variant="dark" />
           </div>
         </div>
         <!-- mobile category start -->
@@ -82,29 +79,6 @@ const handleToggleActive = (type: string) => {
 </script>
 
 <style scoped>
-.hoff-logo {
-  display: inline-flex;
-  flex-direction: column;
-  text-decoration: none;
-  gap: 2px;
-}
-.hoff-logo-word {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: 1.6rem;
-  letter-spacing: 8px;
-  color: #111;
-  text-transform: uppercase;
-  line-height: 1;
-}
-.hoff-logo-sub {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 0.42rem;
-  letter-spacing: 6px;
-  color: #4CC9F0;
-  text-transform: uppercase;
-}
 .hoff-footer-note {
   font-family: 'Inter', sans-serif;
   font-size: 0.72rem;

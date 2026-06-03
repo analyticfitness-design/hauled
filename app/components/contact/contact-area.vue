@@ -217,7 +217,7 @@ const onSubmit = handleSubmit(() => {
 .h-form-group input:focus,
 .h-form-group textarea:focus {
   border-color: var(--h-blue, #4CC9F0);
-  box-shadow: 0 0 0 3px rgba(76,201,240,0.12);
+  box-shadow: 0 0 0 3px rgba(76, 201, 240,0.12);
   background: #fff;
 }
 .h-input-error { border-color: #e53e3e !important; }

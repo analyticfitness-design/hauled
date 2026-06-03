@@ -49,7 +49,7 @@
   transition: border-color 160ms, box-shadow 160ms !important;
   &:focus {
     border-color: #4CC9F0 !important;
-    box-shadow: 0 0 0 3px rgba(76,201,240,0.15) !important;
+    box-shadow: 0 0 0 3px rgba(76, 201, 240,0.15) !important;
     background-color: #ffffff !important;
   }
   &::placeholder { color: rgba(0,0,0,0.35) !important; }
@@ -194,4 +194,24 @@
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   color: #111111 !important;
+}
+
+// ── Títulos estilo Gymshark: MAYÚSCULAS + tracking + Raleway (firma de marca) ──
+// Aplica a títulos de hero/sección. EXCLUYE nombres de producto (sentence-case por identidad).
+h1, h2, h3,
+.tp-section-title__title,
+.tp-hero-title,
+.h-logo-word,
+.hauled-encargo-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+}
+// Excepciones — NO mayúsculas (nombres de producto / detalle / texto largo)
+.tp-product-title, .tp-product-title a,
+.product__title, .product-details__title,
+.tp-product-details-title, .tp-cart-title {
+  text-transform: none !important;
+  letter-spacing: normal !important;
 }

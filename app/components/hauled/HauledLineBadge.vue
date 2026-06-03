@@ -7,8 +7,8 @@ const config = {
   originals: {
     label: '🇺🇸 USA Original',
     bg: '#0d2233',
-    color: '#4cc9f0',
-    border: '#4cc9f0',
+    color: '#4CC9F0',
+    border: '#4CC9F0',
   },
   basics: {
     label: 'HAULED Basics',

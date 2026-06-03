@@ -152,7 +152,7 @@ const props = withDefaults(
   margin: 4px 0 6px;
 }
 .hauled-price-encargo {
-  color: #4cc9f0 !important;
+  color: #4CC9F0 !important;
   font-weight: 700;
   cursor: pointer;
 }

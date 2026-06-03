@@ -11,6 +11,8 @@ interface ApiProduct {
   price_usd_full?: number
   price_usd_sale?: number
   price_cop_sale?: number
+  compare_price?: number
+  discount?: number
   stock: number
   hauled_line: string
   images: string[]
@@ -26,6 +28,12 @@ interface ApiResponse {
   last_page?: number
   total?: number
 }
+
+// % de descuento para el badge. La API es la fuente de verdad (campo `discount`);
+// si no viene, se deriva del par de precios que ya entrega la API (presentación,
+// NO recálculo de precio de venta). 0 = sin badge.
+const discountPct = (full?: number, sale?: number) =>
+  full && sale && full > sale ? Math.round((1 - sale / full) * 100) : 0
 
 const mapApiProduct = (p: ApiProduct): IProduct => ({
   id: String(p.id),
@@ -44,7 +52,7 @@ const mapApiProduct = (p: ApiProduct): IProduct => ({
   priceUsd: p.price_usd_full != null ? p.price_usd_full / 100 : (p.price_usd ? p.price_usd / 100 : undefined),
   priceUsdSale: p.price_usd_sale != null ? p.price_usd_sale / 100 : undefined,
   priceCopSale: p.price_cop_sale,
-  discount: 15,
+  discount: p.discount ?? (discountPct(p.compare_price ?? p.price, p.price_cop_sale) || discountPct(p.price_usd_full, p.price_usd_sale)),
   quantity: p.stock ?? 0,
   brand: { name: p.brand?.name ?? 'GASP' },
   category: { name: p.category?.name ?? '' },

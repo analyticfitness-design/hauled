@@ -1,112 +1,156 @@
 <template>
+  <!-- Scrim (overlay) -->
   <div
-    :class="`cartmini__area tp-all-font-roboto ${
-      cartStore.cartOffcanvas ? 'cartmini-opened' : ''
-    }`"
+    :class="['hk-cart-scrim', { 'is-open': cartStore.cartOffcanvas }]"
+    aria-hidden="true"
+    @click="cartStore.handleCartOffcanvas"
+  />
+
+  <!-- Drawer -->
+  <aside
+    :class="['hk-cart', { 'is-open': cartStore.cartOffcanvas }]"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Tu carrito de compras"
   >
-    <div class="cartmini__wrapper d-flex justify-content-between flex-column">
-      <div class="cartmini__top-wrapper">
-        <div class="cartmini__top p-relative">
-          <div class="cartmini__top-title">
-            <h4>Shopping cart</h4>
-          </div>
-          <div class="cartmini__close">
-            <button
-              @click="cartStore.handleCartOffcanvas"
-              type="button"
-              class="cartmini__close-btn cartmini-close-btn"
-            >
-              <i class="fal fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="cartmini__shipping">
-          <cart-progress />
-        </div>
-        <div v-if="cartStore.cart_products.length > 0" class="cartmini__widget">
-          <div
-            v-for="item in cartStore.cart_products"
-            :key="item.id"
-            class="cartmini__widget-item"
-          >
-            <div class="cartmini__thumb">
-              <nuxt-link :href="`/product-details/${item.id}`">
-                <img :src="item.img" alt="cart-img" width="70" height="60" />
-              </nuxt-link>
-            </div>
-            <div class="cartmini__content">
-              <h5 class="cartmini__title">
-                <nuxt-link :href="`/product-details/${item.id}`">
-                  {{ item.title }}
-                </nuxt-link>
-              </h5>
-              <div class="cartmini__price-wrapper">
-                <span
-                  v-if="item.discount > 0 && item.orderQuantity"
-                  class="cartmini__price"
-                >
-                  {{formatPrice((Number(item.price) - (Number(item.price) * Number(item.discount)) / 100) * item.orderQuantity)}}
-                </span>
-                <span v-else class="cartmini__price">
-                  {{formatPrice(item.price * (item.orderQuantity ?? 0))}}
-                </span>
-                <span class="cartmini__quantity">{{ " " }}x{{ item.orderQuantity }}</span>
-              </div>
-            </div>
-            <a
-              @click="cartStore.removeCartProduct(item)"
-              class="cartmini__del cursor-pointer">
-              <i class="fa-regular fa-xmark"></i>
-            </a>
-          </div>
-        </div>
-        <!-- if no item in cart  -->
+    <!-- Head -->
+    <div class="hk-cart-head">
+      <span class="hk-cart-title">
+        Tu carrito
+        <span class="hk-cart-n" aria-label="`${itemCount} productos`">{{ itemCount }}</span>
+      </span>
+      <button
+        class="hk-icon-btn"
+        type="button"
+        aria-label="Cerrar carrito"
+        @click="cartStore.handleCartOffcanvas"
+      >
+        <!-- close icon (Lucide-style stroke 1.5) -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="hk-cart-body">
+      <!-- Empty state -->
+      <div v-if="cartStore.cart_products.length === 0" class="hk-cart-empty">
+        <!-- bag icon -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <p>Tu carrito está vacío</p>
+      </div>
+
+      <!-- Items -->
+      <template v-else>
         <div
-          v-if="cartStore.cart_products.length === 0"
-          class="cartmini__empty text-center"
+          v-for="item in cartStore.cart_products"
+          :key="`${item.id}-${item.selectedSize ?? ''}`"
+          class="hk-cart-item"
         >
           <img
-            src="/img/product/cartmini/empty-cart.png"
-            alt="empty-cart-img"
+            :src="item.img"
+            :alt="item.title"
+            width="64"
+            height="80"
+            loading="lazy"
           />
-          <p>Your Cart is empty</p>
-          <nuxt-link href="/shop" class="tp-btn">Go to Shop</nuxt-link>
-        </div>
-      </div>
-      <div v-if="cartStore.cart_products.length > 0" class="cartmini__checkout">
-        <div class="cartmini__checkout-title mb-30">
-          <h4>Subtotal:</h4>
-          <span>{{ formatPrice(cartStore.totalPriceQuantity.total) }}</span>
-        </div>
-        <div class="cartmini__checkout-btn">
-          <nuxt-link
-            href="/cart"
-            @click="cartStore.handleCartOffcanvas"
-            class="tp-btn mb-10 w-100"
+          <div class="hk-cart-item-info">
+            <p class="hk-cart-item-name">{{ item.title }}</p>
+            <p class="hk-cart-item-meta">
+              <template v-if="item.hauledLine === 'encargo'">
+                Encargo · cotizar
+              </template>
+              <template v-else>
+                {{ item.selectedSize ? `Talla ${item.selectedSize} · ` : '' }}x{{ item.orderQuantity ?? 1 }}
+              </template>
+            </p>
+            <p class="hk-cart-item-price">
+              <template v-if="item.hauledLine === 'encargo'">
+                Cotizar →
+              </template>
+              <template v-else>
+                {{ formatItemPrice(item) }}
+              </template>
+            </p>
+          </div>
+          <button
+            class="hk-cart-item-rm"
+            type="button"
+            :aria-label="`Eliminar ${item.title} del carrito`"
+            @click="cartStore.removeCartProduct(item)"
           >
-            view cart
-          </nuxt-link>
-          <nuxt-link
-            href="/checkout"
-            @click="cartStore.handleCartOffcanvas"
-            class="tp-btn tp-btn-border w-100"
-          >
-            checkout
-          </nuxt-link>
+            <!-- close icon small -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true">
+              <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
-      </div>
+      </template>
     </div>
-  </div>
-  <!-- overlay start  -->
-  <div
-    @click="cartStore.handleCartOffcanvas"
-    :class="`body-overlay ${cartStore.cartOffcanvas ? 'opened' : ''}`"
-  ></div>
-  <!-- overlay end  -->
+
+    <!-- Footer (only when cart has items) -->
+    <div v-if="cartStore.cart_products.length > 0" class="hk-cart-foot">
+      <div class="hk-cart-total">
+        <span>Subtotal</span>
+        <span>{{ formatTotal(cartStore.totalPriceQuantity.total) }}</span>
+      </div>
+      <NuxtLink
+        to="/checkout"
+        class="hk-btn-primary"
+        @click="cartStore.handleCartOffcanvas"
+      >
+        IR AL CHECKOUT
+      </NuxtLink>
+      <button
+        type="button"
+        class="hk-cart-continue"
+        @click="cartStore.handleCartOffcanvas"
+      >
+        Seguir comprando
+      </button>
+    </div>
+  </aside>
 </template>
 
 <script setup lang="ts">
-import { useCartStore } from "@/pinia/useCartStore";
+import { computed } from 'vue';
+import { useCartStore } from '@/pinia/useCartStore';
+import type { IProduct } from '@/types/product-type';
 
 const cartStore = useCartStore();
+
+const itemCount = computed(() => cartStore.cart_products.length);
+
+const cop = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  maximumFractionDigits: 0,
+});
+
+function formatTotal(amount: number): string {
+  return cop.format(amount);
+}
+
+function formatItemPrice(item: IProduct): string {
+  const qty = item.orderQuantity ?? 1;
+  let unitPrice = item.price;
+  if (item.discount && item.discount > 0) {
+    unitPrice = unitPrice - (unitPrice * item.discount) / 100;
+  }
+  return cop.format(unitPrice * qty);
+}
 </script>

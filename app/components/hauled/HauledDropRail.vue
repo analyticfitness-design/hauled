@@ -1,23 +1,40 @@
 <template>
-  <section class="hk-featured">
-    <div class="hk-featured-head">
+  <section class="hk-drop">
+    <div class="hk-drop-head">
       <div>
-        <p class="hk-eyebrow">En stock ahora</p>
-        <h2 class="hk-h2 hk-ink">GASP Collection</h2>
+        <p class="hk-eyebrow">
+          <span class="hk-eyebrow-line" />Recién llegado
+        </p>
+        <h2 class="hk-h2" style="color:#fff">Lo último que cargamos</h2>
       </div>
-      <NuxtLink to="/shop" class="hk-see-all">
+      <NuxtLink to="/shop" class="hk-drop-all">
         Ver todo <span class="hk-arrow">→</span>
       </NuxtLink>
     </div>
-    <div class="hk-grid-4">
-      <div
-        v-for="(product, i) in featuredProducts"
+    <div class="hk-drop-rail">
+      <NuxtLink
+        v-for="product in dropProducts"
         :key="product.id"
-        class="hk-fade"
-        :style="{ animationDelay: `${i * 55}ms` }"
+        :to="`/product-details/${product.id}`"
+        class="hk-drop-card"
       >
-        <HauledProductCard :item="product" @quote="onQuote" />
-      </div>
+        <div class="hk-drop-media">
+          <img
+            :src="product.img || '/img/placeholder.jpg'"
+            :alt="product.title"
+            loading="lazy"
+          />
+          <span v-if="product.status === 'New'" class="hk-drop-badge">Nuevo</span>
+        </div>
+        <div class="hk-drop-info">
+          <span class="hk-drop-cat">{{ product.category?.name || product.parent || '' }}</span>
+          <span class="hk-drop-name">{{ product.title }}</span>
+          <span class="hk-drop-price">
+            {{ product.hauledLine === 'encargo' ? 'Cotizar' : fmtCop(product.price) }}
+            <em v-if="product.priceUsd && product.hauledLine !== 'encargo'">USD ${{ product.priceUsd }}</em>
+          </span>
+        </div>
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -57,7 +74,7 @@ const mapProduct = (p: ApiProductRaw): IProduct => ({
   slug: p.slug,
   description: p.description ?? '',
   img: p.images?.[0] ?? '/img/products/placeholder.jpg',
-  imageURLs: (p.images ?? []).map((img) => ({ color: { name: 'Default', clrCode: '#000' }, img })),
+  imageURLs: [],
   parent: p.category?.name ?? '',
   children: '',
   price: p.price_cop_sale ?? p.price,
@@ -79,11 +96,11 @@ const mapProduct = (p: ApiProductRaw): IProduct => ({
 })
 
 const { data: apiProducts } = await useAsyncData<IProduct[]>(
-  'home-featured',
+  'home-drop-rail',
   async () => {
     try {
       const res = await $fetch<ApiResponse>(`${apiBase}/api/v1/products`, {
-        params: { per_page: '24', hauled_line: 'originals' },
+        params: { per_page: '16' },
       })
       return (res.data ?? []).map(mapProduct)
     } catch {
@@ -93,15 +110,11 @@ const { data: apiProducts } = await useAsyncData<IProduct[]>(
   },
 )
 
-const featuredProducts = computed<IProduct[]>(() => {
+const dropProducts = computed<IProduct[]>(() => {
   const all = apiProducts.value ?? []
-  const gasp = all.filter((p) => p.brand?.name === 'GASP')
-  const others = all.filter((p) => p.brand?.name !== 'GASP' && (p.featured || p.status === 'New'))
-  return [...gasp, ...others].slice(0, 8)
+  return all.filter((p) => p.hauledLine !== 'encargo').slice(0, 8)
 })
 
-const router = useRouter()
-const onQuote = (_item: IProduct) => {
-  router.push('/encargos')
-}
+const fmtCop = (n: number) =>
+  new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n)
 </script>

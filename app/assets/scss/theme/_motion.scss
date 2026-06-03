@@ -1,0 +1,40 @@
+// ════════════════════════════════════════════════════════════════════
+//  HAULED · _motion.scss — M-codes (firma + microinteracciones)
+//  Regla dura: la VISIBILIDAD EN REPOSO nunca depende de una animación.
+//  El estado base es visible; el motion solo lo enriquece. Animamos
+//  transform / clip-path (GPU-safe), no opacity con fill desde 0.
+// ════════════════════════════════════════════════════════════════════
+
+// ── M01 · Snap reveal (FIRMA) ───────────────────────────────────────
+// Wipe duro de izquierda→derecha. En reposo el elemento ya es visible;
+// la animación solo corre cuando se añade .is-in (vía IntersectionObserver).
+@keyframes hauled-snap {
+  from { clip-path: inset(0 100% 0 0); transform: translateY(8px); }
+  to   { clip-path: inset(0 0 0 0);    transform: translateY(0); }
+}
+.h-snap {
+  // base = visible (si JS/anim no corre, igual se ve)
+  clip-path: inset(0 0 0 0);
+}
+.h-snap.is-in {
+  animation: hauled-snap var(--hauled-dur-snap, 280ms) var(--hauled-ease) both;
+}
+
+// ── M03 · Scroll raise (con stagger por --i) ────────────────────────
+@keyframes hauled-rise {
+  from { transform: translateY(16px); }
+  to   { transform: translateY(0); }
+}
+.h-rise.is-in {
+  animation: hauled-rise var(--hauled-dur-rise, 400ms) var(--hauled-ease) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+// ── Reduced motion: desactivar todo lo no esencial ──────────────────
+@media (prefers-reduced-motion: reduce) {
+  .h-snap.is-in,
+  .h-rise.is-in {
+    animation: none;
+  }
+  .h-snap { clip-path: none; }
+}

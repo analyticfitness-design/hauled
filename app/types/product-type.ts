@@ -50,6 +50,7 @@ export interface IProduct {
   tags?: string[];
   videoId?:string;
   sizes?:string[];
+  selectedSize?: string; // talla elegida por el usuario antes de agregar al carrito
   // HAULED custom fields
   hauledLine?: 'originals' | 'basics' | 'encargo';
   deliveryDays?: string;

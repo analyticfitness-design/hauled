@@ -33,10 +33,7 @@
           <div class="h-main-inner">
 
             <!-- Logo -->
-            <nuxt-link to="/" class="h-logo">
-              <span class="h-logo-word">HAULED</span>
-              <span class="h-logo-sub">Direct from the States</span>
-            </nuxt-link>
+            <hauled-logo size="md" variant="light" />
 
             <!-- Nav desktop (hidden on mobile via Bootstrap d-none d-lg-flex) -->
             <nav class="h-nav-desktop d-none d-lg-flex">
@@ -272,7 +269,7 @@ const searchCloseRef = useClickOutside(closeSearch);
 ════════════════════════════════════════════════════ */
 .h-main {
   background: var(--h-black, #111);
-  border-bottom: 1px solid rgba(76,201,240,0.12);
+  border-bottom: 1px solid rgba(76, 201, 240,0.12);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -282,7 +279,7 @@ const searchCloseRef = useClickOutside(closeSearch);
   background: rgba(12,12,12,0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 rgba(76,201,240,0.15), 0 8px 32px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 0 rgba(76, 201, 240,0.15), 0 8px 32px rgba(0,0,0,0.5);
 }
 
 .h-main-inner {
@@ -296,36 +293,6 @@ const searchCloseRef = useClickOutside(closeSearch);
   .h-main-inner { grid-template-columns: 1fr auto; }
   .h-nav-desktop { display: none !important; }
 }
-
-/* ════════════════════════════════════════════════════
-   LOGO
-════════════════════════════════════════════════════ */
-.h-logo {
-  display: inline-flex;
-  flex-direction: column;
-  line-height: 1;
-  text-decoration: none;
-  gap: 3px;
-  flex-shrink: 0;
-}
-.h-logo-word {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: clamp(1.2rem, 3vw, 1.75rem);
-  letter-spacing: 10px;
-  color: #fff;
-  text-transform: uppercase;
-  transition: color 180ms;
-}
-.h-logo-sub {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 0.42rem;
-  letter-spacing: 6px;
-  color: var(--h-blue, #4CC9F0);
-  text-transform: uppercase;
-}
-.h-logo:hover .h-logo-word { color: var(--h-blue, #4CC9F0); }
 
 /* ════════════════════════════════════════════════════
    NAV DESKTOP
@@ -426,7 +393,7 @@ const searchCloseRef = useClickOutside(closeSearch);
   grid-template-columns: 1fr 1fr auto;
   gap: 0;
   background: #141414;
-  border: 1px solid rgba(76,201,240,0.15);
+  border: 1px solid rgba(76, 201, 240,0.15);
   border-radius: 10px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03);
   overflow: hidden;
@@ -545,16 +512,16 @@ const searchCloseRef = useClickOutside(closeSearch);
   transition: background 180ms, color 180ms;
 }
 .h-icon-btn:hover {
-  background: rgba(76,201,240,0.08);
+  background: rgba(76, 201, 240,0.08);
   color: var(--h-blue, #4CC9F0);
 }
 
 /* Cart pill */
 .h-cart-btn {
-  background: rgba(76,201,240,0.06);
-  border: 1px solid rgba(76,201,240,0.2);
+  background: rgba(76, 201, 240,0.06);
+  border: 1px solid rgba(76, 201, 240,0.2);
 }
-.h-cart-btn:hover { background: rgba(76,201,240,0.14); border-color: var(--h-blue, #4CC9F0); }
+.h-cart-btn:hover { background: rgba(76, 201, 240,0.14); border-color: var(--h-blue, #4CC9F0); }
 
 /* Badge */
 .h-badge {
@@ -598,12 +565,12 @@ const searchCloseRef = useClickOutside(closeSearch);
   text-decoration: none;
   transition: background 180ms, color 180ms;
 }
-.h-search-toggle:hover { color: var(--h-blue, #4CC9F0); background: rgba(76,201,240,0.08); }
+.h-search-toggle:hover { color: var(--h-blue, #4CC9F0); background: rgba(76, 201, 240,0.08); }
 .h-search-box {
   display: flex;
   align-items: center;
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(76,201,240,0.25);
+  border: 1px solid rgba(76, 201, 240,0.25);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -621,7 +588,7 @@ const searchCloseRef = useClickOutside(closeSearch);
 .h-search-go {
   padding: 0 12px;
   height: 100%;
-  background: rgba(76,201,240,0.1);
+  background: rgba(76, 201, 240,0.1);
   border: none;
   color: var(--h-blue, #4CC9F0);
   font-size: 1rem;
@@ -631,7 +598,7 @@ const searchCloseRef = useClickOutside(closeSearch);
   display: flex;
   align-items: center;
 }
-.h-search-go:hover { background: rgba(76,201,240,0.2); }
+.h-search-go:hover { background: rgba(76, 201, 240,0.2); }
 
 /* Search transition */
 .searchExpand-enter-active,

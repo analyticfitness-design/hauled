@@ -24,7 +24,7 @@
 
         <!-- Items de encargo (separados) -->
         <li v-if="encargoItems.length > 0" class="tp-order-info-list-desc hauled-encargo-separator">
-          <p style="color:#4cc9f0;font-weight:700">📦 Encargos (cotización pendiente)</p>
+          <p style="color:#4CC9F0;font-weight:700">📦 Encargos (cotización pendiente)</p>
           <span>—</span>
         </li>
         <li
@@ -33,7 +33,7 @@
           class="tp-order-info-list-desc"
         >
           <p style="color:#666">{{ item.title }}</p>
-          <span style="color:#4cc9f0;font-size:0.8rem">Cotizar</span>
+          <span style="color:#4CC9F0;font-size:0.8rem">Cotizar</span>
         </li>
 
         <!-- Subtotal -->
@@ -47,16 +47,16 @@
           <span>Envío</span>
           <div class="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
             <span>
-              <input id="envio_bga" type="radio" name="shipping" />
-              <label @click="handleShippingCost(0)" for="envio_bga">Bucaramanga: <span>Gratis</span></label>
+              <input id="envio_bga" type="radio" name="shipping" v-model="cartStore.shippingOption" value="bga" />
+              <label for="envio_bga">Bucaramanga: <span>Gratis</span></label>
             </span>
             <span>
-              <input id="envio_nac" type="radio" name="shipping" />
-              <label @click="handleShippingCost(22000)" for="envio_nac">Nacional: <span>{{ formatPrice(22000) }}</span></label>
+              <input id="envio_nac" type="radio" name="shipping" v-model="cartStore.shippingOption" value="nac" />
+              <label for="envio_nac">Nacional: <span>{{ formatPrice(22000) }}</span></label>
             </span>
             <span>
-              <input id="envio_free" type="radio" name="shipping" />
-              <label @click="handleShippingCost(0)" for="envio_free">Nacional gratis (+$300.000)</label>
+              <input id="envio_free" type="radio" name="shipping" v-model="cartStore.shippingOption" value="free" />
+              <label for="envio_free">Nacional gratis (+$300.000)</label>
             </span>
           </div>
         </li>
@@ -131,7 +131,7 @@ const props = defineProps<{
 const cartStore = useCartStore();
 const config = useRuntimeConfig();
 
-let shipCost = ref<number>(0);
+const shipCost = computed(() => cartStore.shipCost);
 let payment_name = ref<string>('wompi');
 let termsAccepted = ref<boolean>(false);
 let processing = ref<boolean>(false);
@@ -148,7 +148,6 @@ const encargoItems = computed(() =>
   cartStore.cart_products.filter(p => p.hauledLine === 'encargo')
 );
 
-const handleShippingCost = (value: number) => { shipCost.value = value; };
 const handlePayment = (value: string) => { payment_name.value = value; };
 
 const handleCheckout = async () => {
@@ -196,7 +195,7 @@ const handleCheckout = async () => {
       items: stockItems.value.map(item => ({
         product_slug: item.slug,
         quantity: item.orderQuantity ?? 1,
-        size: item.sizes?.[0] ?? null,
+        size: item.selectedSize || item.sizes?.[0] || null,
       })),
       address: {
         name: `${billing.nombre} ${billing.apellido}`.trim(),
@@ -234,10 +233,10 @@ const handleCheckout = async () => {
 </script>
 
 <style scoped>
-.hauled-encargo-separator { border-top: 1px dashed #4cc9f0; }
+.hauled-encargo-separator { border-top: 1px dashed #4CC9F0; }
 .hauled-encargo-checkout-notice {
   background: #f4f4f4;
-  border-left: 4px solid #4cc9f0;
+  border-left: 4px solid #4CC9F0;
   border-radius: 6px;
   padding: 10px 14px;
   font-size: 0.82rem;

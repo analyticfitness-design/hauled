@@ -1,157 +1,54 @@
 <template>
-  <section class="hauled-encargo-cta" :style="{ backgroundImage: `url('/img/hero/section-gym-bg.jpg')` }">
-    <div class="container">
-      <div class="hauled-encargo-inner">
-        <div class="hauled-encargo-text">
-          <span class="hauled-encargo-eyebrow">📦 Servicio de Encargos</span>
-          <h2 class="hauled-encargo-title">¿No encuentras lo que buscas?</h2>
-          <p class="hauled-encargo-desc">
-            Dinos qué quieres y lo traemos directamente de USA. Nike, Supreme, Off-White,
-            Air Jordan, Yeezy — cualquier marca, cualquier talla, cualquier colorway.
-          </p>
-          <ul class="hauled-encargo-list">
-            <li>✅ Cotización sin costo</li>
-            <li>✅ 15–25 días hábiles</li>
-            <li>✅ 50% anticipo, 50% al llegar</li>
-            <li>✅ Garantía de autenticidad</li>
-          </ul>
-        </div>
-        <div class="hauled-encargo-action">
+  <section class="hk-encargo">
+    <div class="hk-encargo-glow" />
+    <div class="hk-encargo-inner">
+      <div class="hk-encargo-head">
+        <span class="hk-encargo-tag">Encargos USA → CO</span>
+        <h2 class="hk-encargo-title">
+          ¿No está aquí?<br /><span class="hk-accent">Lo traemos.</span>
+        </h2>
+        <p class="hk-encargo-lead">
+          Nike, Supreme, Off-White, Air Jordan, Yeezy — cualquier marca, talla o colorway. Lo cargamos directo del source.
+        </p>
+        <div class="hk-encargo-actions">
           <a
-            :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola HAULED, quiero hacer un encargo 📦')}`"
+            :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola HAULED, quiero iniciar un encargo 📦')}`"
             target="_blank"
-            class="hauled-wa-cta"
+            rel="noopener noreferrer"
+            class="hk-btn-wa"
           >
-            💬 Iniciar encargo por WhatsApp
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884a9.825 9.825 0 0 1 6.988 2.898 9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+            </svg>
+            Iniciar encargo
           </a>
-          <nuxt-link to="/encargos" class="hauled-catalog-cta">
-            Ver catálogo de encargos
-          </nuxt-link>
-          <p class="hauled-encargo-note">Respondemos siempre · 24/7 · Envío gratis en Bucaramanga</p>
+          <NuxtLink to="/encargos" class="hk-encargo-ghost">Ver cómo funciona →</NuxtLink>
         </div>
+        <p class="hk-encargo-note">
+          Cotización sin costo · 50% anticipo, 50% al llegar · Garantía de autenticidad
+        </p>
       </div>
+      <ol class="hk-encargo-steps">
+        <li v-for="step in STEPS" :key="step.n" class="hk-encargo-step">
+          <span class="hk-encargo-step-n">{{ step.n }}</span>
+          <span class="hk-encargo-step-tx">
+            <span class="hk-encargo-step-t">{{ step.t }}</span>
+            <span class="hk-encargo-step-d">{{ step.d }}</span>
+          </span>
+        </li>
+      </ol>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-const config = useRuntimeConfig();
-const whatsappNumber = config.public.whatsappNumber as string;
-</script>
+const config = useRuntimeConfig()
+const whatsappNumber = (config.public.whatsappNumber as string) || '573000000000'
 
-<style scoped>
-.hauled-encargo-cta {
-  padding: var(--h-section-py, 80px) 0;
-  background-color: var(--h-navy, #0d2233);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-.hauled-encargo-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(13, 34, 51, 0.88);
-  z-index: 0;
-}
-.hauled-encargo-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: clamp(32px, 5vw, 60px);
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .hauled-encargo-inner { grid-template-columns: 1fr; gap: 36px; }
-}
-.hauled-encargo-eyebrow {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: var(--h-fs-label, 0.72rem);
-  font-weight: 300;
-  letter-spacing: var(--h-ls-sub, 7px);
-  text-transform: uppercase;
-  color: var(--h-blue, #4CC9F0);
-  margin-bottom: 16px;
-}
-.hauled-encargo-title {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 900;
-  font-size: var(--h-fs-h2, clamp(1.4rem, 4vw, 2.2rem));
-  letter-spacing: var(--h-ls-title, 2px);
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 16px;
-}
-.hauled-encargo-desc {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--h-fs-body, 0.95rem);
-  line-height: 1.7;
-  color: var(--h-muted, rgba(255,255,255,0.6));
-  margin-bottom: 24px;
-  max-width: 480px;
-}
-.hauled-encargo-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-.hauled-encargo-list li {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--h-fs-small, 0.88rem);
-  color: rgba(255,255,255,0.75);
-}
-.hauled-encargo-action {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: stretch;
-  min-width: 250px;
-}
-@media (max-width: 768px) { .hauled-encargo-action { min-width: 0; } }
-.hauled-wa-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #25D366;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 0.88rem;
-  letter-spacing: 1px;
-  padding: 16px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  min-height: 50px;
-  transition: background var(--h-dur-fast, 180ms);
-}
-.hauled-wa-cta:hover { background: #1aab52; }
-.hauled-catalog-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: var(--h-blue, #4CC9F0);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: var(--h-fs-small, 0.85rem);
-  padding: 14px 28px;
-  border: 1px solid var(--h-blue, #4CC9F0);
-  border-radius: 6px;
-  text-decoration: none;
-  min-height: 44px;
-  transition: background var(--h-dur-fast, 180ms), color var(--h-dur-fast, 180ms);
-}
-.hauled-catalog-cta:hover { background: var(--h-blue, #4CC9F0); color: #111; }
-.hauled-encargo-note {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--h-fs-label, 0.72rem);
-  color: rgba(255,255,255,0.28);
-  text-align: center;
-  margin: 0;
-}
-</style>
+const STEPS = [
+  { n: '01', t: 'Dinos qué quieres', d: 'Marca, modelo, talla o un link.' },
+  { n: '02', t: 'Cotizamos en 24h', d: 'Precio final en pesos. Sin sorpresas.' },
+  { n: '03', t: 'Lo cargamos', d: 'Tu pedido viaja directo desde USA.' },
+  { n: '04', t: 'Te lo entregamos', d: '8–12 días hábiles en Colombia.' },
+]
+</script>

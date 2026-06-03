@@ -8,6 +8,13 @@ export const useCartStore = defineStore("cart_product", () => {
   let cart_products = ref<IProduct[]>([]);
   let orderQuantity = ref<number>(1);
   let cartOffcanvas = ref<boolean>(false);
+  let shippingOption = ref<string>('bga');
+
+  // Derived ship cost from shippingOption (shared across cart and checkout pages)
+  const shipCost = computed(() => {
+    if (shippingOption.value === 'nac') return 22000;
+    return 0;
+  });
 
   const CART_TTL_MS = 24 * 60 * 60 * 1000;
 
@@ -18,12 +25,12 @@ export const useCartStore = defineStore("cart_product", () => {
     }));
   };
 
-  const addCartProduct = (payload: IProduct) => {
-    const isExist = cart_products.value.some((i) => i.id === payload.id);
+  const addCartProduct = (payload: IProduct, selectedSize?: string) => {
+    const isExist = cart_products.value.some((i) => i.id === payload.id && i.selectedSize === (selectedSize ?? payload.selectedSize ?? ''));
     if (payload.status === 'out-of-stock') {
       toast.error(`${payload.title} está agotado`);
     } else if (!isExist) {
-      cart_products.value.push({ ...payload, orderQuantity: 1 });
+      cart_products.value.push({ ...payload, orderQuantity: 1, selectedSize: selectedSize ?? payload.selectedSize ?? '' });
       const msg = payload.hauledLine === 'encargo'
         ? `Encargo de ${payload.title} agregado`
         : `${payload.title} agregado al carrito`;
@@ -129,5 +136,7 @@ export const useCartStore = defineStore("cart_product", () => {
     orderQuantity,
     increment,
     decrement,
+    shippingOption,
+    shipCost,
   };
 });

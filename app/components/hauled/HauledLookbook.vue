@@ -123,11 +123,11 @@ const imgs = [
 .hlb-shimmer {
   position: absolute;
   inset: 0;
-  background: rgba(76,201,240,0.0);
+  background: rgba(76, 201, 240,0.0);
   transition: background 0.3s ease;
   pointer-events: none;
 }
-.hlb-item:hover .hlb-shimmer { background: rgba(76,201,240,0.06); }
+.hlb-item:hover .hlb-shimmer { background: rgba(76, 201, 240,0.06); }
 
 /* ── CTA on last image ──────────────────────────── */
 .hlb-cta-overlay {

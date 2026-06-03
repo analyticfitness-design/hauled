@@ -53,8 +53,8 @@ const handleSubmit = () => {
 <style scoped>
 .hs-section {
   background: var(--h-black, #111);
-  border-top: 1px solid rgba(76,201,240,0.15);
-  border-bottom: 1px solid rgba(76,201,240,0.15);
+  border-top: 1px solid rgba(76, 201, 240,0.15);
+  border-bottom: 1px solid rgba(76, 201, 240,0.15);
   padding: clamp(48px, 6vw, 80px) 0;
 }
 
@@ -112,7 +112,7 @@ const handleSubmit = () => {
 .hs-input-group {
   display: flex;
   gap: 0;
-  border: 1px solid rgba(76,201,240,0.3);
+  border: 1px solid rgba(76, 201, 240,0.3);
   border-radius: 6px;
   overflow: hidden;
   transition: border-color var(--h-dur-fast, 180ms);

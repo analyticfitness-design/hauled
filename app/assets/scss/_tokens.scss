@@ -41,6 +41,39 @@
   // ── Shadows ──────────────────────────────────────
   --h-shadow-card:  0 4px 20px rgba(0, 0, 0, 0.08);
   --h-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+  // ── Tokens extendidos (sincronizados con colors_and_type.css) ──
+  // Aditivo: reemplaza valores cyan/sombra/radio hardcodeados en componentes.
+  --h-ink-deep:     #0c0c0c;   // header sticky, barras negro real
+  --h-blue-bright:  #7be2ff;   // cyan claro (gradientes, glow)
+  --h-blue-deep:    #20C1E9;   // cyan profundo
+  --h-grey-200:     #E0E0E0;   // bordes claros / placeholders
+  --h-navy-700:     #13263E;
+  // Familias (alias semánticos — mismo valor que --hauled-font-*)
+  --h-ff-display:   'Raleway', system-ui, sans-serif;
+  --h-ff-body:      'Inter', system-ui, sans-serif;
+  // Texto
+  --h-fg:           #FFFFFF;                   // texto sobre oscuro
+  --h-fg-ink:       #111111;                   // texto sobre claro
+  --h-muted-2:      rgba(255, 255, 255, 0.40); // tenue sobre oscuro
+  --h-muted-3:      rgba(255, 255, 255, 0.25); // susurro sobre oscuro
+  --h-border-blue:  rgba(76, 201, 240, 0.20);  // hairline cyan
+  // Tints cyan (rellenos, hovers, glows)
+  --h-blue-06: rgba(76, 201, 240, 0.06);
+  --h-blue-08: rgba(76, 201, 240, 0.08);
+  --h-blue-10: rgba(76, 201, 240, 0.10);
+  --h-blue-14: rgba(76, 201, 240, 0.14);
+  --h-blue-18: rgba(76, 201, 240, 0.18);
+  // Radios
+  --h-radius-sm:  3px;   // badges, chips
+  --h-radius:     4px;   // botones, inputs
+  --h-radius-md:  6px;   // cards
+  --h-radius-lg:  10px;  // mega menús, paneles grandes
+  // Duración / sombras dark
+  --h-dur-slow:    650ms;
+  --h-shadow-lift: 0 16px 48px rgba(0, 0, 0, 0.40);
+  --h-shadow-mega: 0 24px 60px rgba(0, 0, 0, 0.70);
+  --h-glow-blue:   0 1px 0 rgba(76,201,240,0.15), 0 8px 32px rgba(0,0,0,0.5);
 }
 
 // ── Scroll animation keyframe (global) ──────────────
@@ -51,4 +84,37 @@
 
 .hauled-animate {
   animation: hauled-fade-up 0.5s var(--h-ease) both;
+}
+
+// ══════════════════════════════════════════════════
+//  HAULED · tokens extendidos para componentes nivel Gymshark
+//  Identidad: CYAN #4CC9F0 + Raleway (display) + Space Mono (sellos)
+//  Aditivo — no rompe los --tp-* (Shofy) ni los --h-* de arriba.
+// ══════════════════════════════════════════════════
+:root {
+  --hauled-ink:        #0A0A0A;
+  --hauled-surface:    #101010;
+  --hauled-surface-2:  #1A1A1A;
+  --hauled-paper:      #F5F5F5;
+  --hauled-g-900:#141414; --hauled-g-800:#222; --hauled-g-700:#333;
+  --hauled-g-600:#555;   --hauled-g-500:#8A8A8A; --hauled-g-400:#AEAEAE;
+  --hauled-g-300:#D4D4D4; --hauled-g-200:#E6E6E6; --hauled-g-100:#F2F2F2;
+  --hauled-line:#E6E6E6; --hauled-line-dark:rgba(255,255,255,.12);
+  --hauled-accent:#4CC9F0; --hauled-accent-press:#0099cc; --hauled-accent-tint:rgba(76,201,240,.12);
+  --hauled-sale:#4CC9F0; --hauled-success:#1F9E5A; --hauled-warning:#E8A400; --hauled-wa:#25D366;
+  --hauled-fg:#0A0A0A; --hauled-fg-dark:#FFFFFF; --hauled-mute:#8A8A8A; --hauled-mute-dark:rgba(255,255,255,.60);
+  // Tipografía (display = Raleway; sellos = Space Mono)
+  --hauled-font-display:'Raleway',system-ui,sans-serif;
+  --hauled-font-title:'Raleway',system-ui,sans-serif;
+  --hauled-font-body:'Inter',system-ui,sans-serif;
+  --hauled-font-mono:'Space Mono',ui-monospace,monospace;
+  --hauled-track-display:-0.01em; --hauled-track-caps:0.14em; --hauled-track-cta:0.08em;
+  --lh-display:0.95; --lh-title:1.05; --lh-body:1.6;
+  // Espaciado / forma
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px; --sp-10:128px;
+  --hauled-section-y:clamp(48px,8vw,112px); --hauled-gutter:clamp(16px,4vw,48px); --hauled-container:1320px;
+  --hauled-r-0:0; --hauled-r-1:2px; --hauled-r-2:4px; --hauled-r-3:8px;
+  --hauled-elev-1:0 1px 2px rgba(0,0,0,.06); --hauled-elev-2:0 8px 24px rgba(0,0,0,.10); --hauled-elev-drawer:-16px 0 48px rgba(0,0,0,.30);
+  // Motion
+  --hauled-ease:cubic-bezier(.2,.7,.2,1); --hauled-dur-fast:200ms; --hauled-dur-snap:280ms; --hauled-dur-med:320ms; --hauled-dur-rise:400ms;
 }
